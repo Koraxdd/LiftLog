@@ -12,7 +12,7 @@ export default function Hero() {
                 <h1 className="text-5xl/15 font-semibold md:text-7xl/22">Transform Your <span className="text-brand">Fitness Journey</span></h1>
                 <p className="font-medium text-xl/8 md:text-2xl/10">The most powerful and intuitive workout tracking platform. Log exercises, monitor progress, and achieve your goals with data-driven insights.</p>
             </div>
-            <Button variant="secondary">Start Free Trial <ArrowRight size={20} className="inline-flex" /></Button>
+            <Button variant="primary" href="/register">Start Free Trial <ArrowRight size={20} className="inline-flex" /></Button>
             <div className="flex gap-6">
                 <div className="flex justify-center items-center gap-3">
                     <Check size={16} className="text-[#22C55E]" />
