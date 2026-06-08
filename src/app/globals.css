@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --paragraph: #9CA3AF;
   --heading: #E5E7EB;
   --background: #0F1117;
   --foreground: black;
@@ -21,4 +22,8 @@ body {
 
 h1 {
   color: var(--heading);
+}
+
+p {
+  color: var(--paragraph);
 }
