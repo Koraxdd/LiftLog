@@ -5,7 +5,7 @@ export default function Navbar() {
     return (
         <header className="sticky top-0 backdrop-blur-md opacity-90">
             <nav className="border-b border-subtle bg-surface py-4 px-6 flex justify-around items-center">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 md:w-1/4">
                     <Dumbbell
                         size={40} 
                         className="text-white inline-flex rotate-y-180 bg-linear-to-br from-brand to-brand-dark px-2 py-1 rounded-lg" 

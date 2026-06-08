@@ -5,10 +5,10 @@ export default function Features() {
     return (
         <section className="px-6">
             <div className="flex flex-col justify-center items-center text-center mt-30 gap-4">
-                <h2 className="text-4xl font-semibold">Everything You Need to Succeed</h2>
-                <p className="text-xl font-medium">Powerful features designed to help you track, analyse, and optimise your fitness journey.</p>
+                <h2 className="text-4xl font-semibold md:text-5xl">Everything You Need to Succeed</h2>
+                <p className="text-xl font-medium md:w-2/5">Powerful features designed to help you track, analyse, and optimise your fitness journey.</p>
             </div>
-            <div className="mt-15 flex flex-col gap-6">
+            <div className="mt-15 flex flex-col gap-6 md:grid md:grid-cols-3 md:w-2/3 md:mx-auto">
                 <FeatureCard title="Track Progress" icon={<TrendingUp size={24} />}>
                     Monitor your strength gains with detailed charts and personal records. Visualise your fitness journey.
                 </FeatureCard>
