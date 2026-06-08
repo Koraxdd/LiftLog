@@ -3,7 +3,7 @@ import { TrendingUp, Calendar, ChartColumnIncreasing, Award, Zap, Users } from "
 
 export default function Features() {
     return (
-        <div className="px-6">
+        <section className="px-6">
             <div className="flex flex-col justify-center items-center text-center mt-30 gap-4">
                 <h2 className="text-4xl font-semibold">Everything You Need to Succeed</h2>
                 <p className="text-xl font-medium">Powerful features designed to help you track, analyse, and optimise your fitness journey.</p>
@@ -28,6 +28,6 @@ export default function Features() {
                     Share achievements, compete with friends, and stay motivated with our community features.
                 </FeatureCard>
             </div>
-        </div>
+        </section>
     )
 }

@@ -2,7 +2,7 @@ import { Dumbbell } from "lucide-react"
 
 export default function Footer() {
     return (
-        <div className="border-t border-border mt-35 flex flex-col justify-center items-center gap-5">
+        <footer className="border-t border-subtle mt-35 flex flex-col justify-center items-center gap-5">
             <div className="flex items-center gap-2 mt-12">
                 <Dumbbell
                     size={32} 
@@ -11,6 +11,6 @@ export default function Footer() {
                 <h1 className="font-semibold">LiftLog</h1>
             </div>
             <p className="mb-12 font-medium">&copy; {new Date().getFullYear()} LiftLog. All rights reserved.</p>
-        </div>
+        </footer>
     )
 }

@@ -9,7 +9,7 @@ type FeatureCardProps = {
 
 export default function FeatureCard({ children, title, icon }: FeatureCardProps) {
     return (
-        <div className="bg-card border border-border rounded-lg px-8 py-7 flex flex-col gap-4">
+        <div className="bg-card border border-subtle rounded-lg px-8 py-7 flex flex-col gap-4">
             <div>
                 <Icon>{icon}</Icon>
             </div>
