@@ -12,8 +12,8 @@ export default function Navbar() {
                 <h1 className="font-semibold text-xl">LiftLog</h1>
             </div>
             <div className="flex gap-2">
-                <Button variant="login">Login</Button>
-                <Button variant="register">Get Started</Button>
+                <Button variant="ghost">Login</Button>
+                <Button variant="primary">Get Started</Button>
             </div>
         </div>
     )
