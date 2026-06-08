@@ -6,6 +6,14 @@
   --background: #0F1117;
 }
 
+@theme {
+  --color-brand: #3B82F6;
+  --color-brand-dark: #2563EB;
+  --color-surface: #0F1117;
+  --color-border: #374151;
+  --color-card: #1A1D29;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0F1117;
