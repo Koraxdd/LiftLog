@@ -1,10 +1,5 @@
 import FeatureCard from "./FeatureCard";
-import { TrendingUp } from "lucide-react";
-import { Calendar } from "lucide-react";
-import { ChartColumnIncreasing } from "lucide-react";
-import { Award } from "lucide-react";
-import { Zap } from "lucide-react";
-import { Users } from "lucide-react";
+import { TrendingUp, Calendar, ChartColumnIncreasing, Award, Zap, Users } from "lucide-react";
 
 export default function Features() {
     return (

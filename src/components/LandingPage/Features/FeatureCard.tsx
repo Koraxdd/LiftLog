@@ -1,10 +1,10 @@
-import type { ReactNode } from "react"
+import type { ReactElement, ReactNode } from "react"
 import Icon from "../../Icon"
 
 type FeatureCardProps = {
     children: ReactNode
     title: string
-    icon: ReactNode
+    icon: ReactElement
 }
 
 export default function FeatureCard({ children, title, icon }: FeatureCardProps) {

@@ -8,7 +8,7 @@ type ButtonProps = {
     onClick?: () => void
 }
 
-export default function Button({ children, variant, type, onClick }: ButtonProps) {
+export default function Button({ children, variant, type="button", onClick }: ButtonProps) {
     const style = clsx(
         "px-4 py-2 rounded-lg font-semibold",
         variant === "ghost" && "text-[#9CA3AF]",
