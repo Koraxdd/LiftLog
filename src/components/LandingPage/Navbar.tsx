@@ -1,5 +1,5 @@
 import { Dumbbell } from "lucide-react"
-import Button from "./Button"
+import Button from "../Button"
 
 export default function Navbar() {
     return (

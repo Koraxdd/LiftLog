@@ -1,7 +1,7 @@
 import { Zap } from "lucide-react"
 import { ArrowRight } from "lucide-react"
 import { Check } from "lucide-react"
-import Button from "./Button"
+import Button from "../Button"
 
 export default function Hero() {
     return (

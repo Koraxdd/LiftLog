@@ -1,8 +1,9 @@
-import CTA from "@/components/CTA";
-import Features from "@/components/Features/Features";
-import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
-import SocialProof from "@/components/Social/SocialProof";
+import CTA from "@/components/LandingPage/CTA";
+import Features from "@/components/LandingPage/Features/Features";
+import Footer from "@/components/LandingPage/Footer";
+import Hero from "@/components/LandingPage/Hero";
+import Navbar from "@/components/LandingPage/Navbar";
+import SocialProof from "@/components/LandingPage/Social/SocialProof";
 
 export default function LandingPage() {
   return (
@@ -12,6 +13,7 @@ export default function LandingPage() {
       <SocialProof />
       <Features />
       <CTA />
+      <Footer />
     </div>
   )
 }
