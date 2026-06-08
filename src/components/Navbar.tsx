@@ -5,7 +5,10 @@ export default function Navbar() {
     return (
         <div className="border-b border-[#374151] bg-[#0F1117] py-4 px-6 flex justify-around items-center">
             <div className="flex items-center gap-2">
-                <Dumbbell size={40} className="text-white inline-flex rotate-y-180 bg-[#3B82F6] px-2 py-1 rounded-lg" />
+                <Dumbbell
+                    size={40} 
+                    className="text-white inline-flex rotate-y-180 bg-linear-to-br from-[#3B82F6] to-[#2563EB] px-2 py-1 rounded-lg" 
+                />
                 <h1 className="font-semibold text-xl">LiftLog</h1>
             </div>
             <div className="flex gap-2">

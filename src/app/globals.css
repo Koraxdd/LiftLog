@@ -2,13 +2,13 @@
 
 :root {
   --heading: #E5E7EB;
-  --background: white;
+  --background: #0F1117;
   --foreground: black;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: white;
+    --background: #0F1117;
     --foreground: black;
   }
 }
