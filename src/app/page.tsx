@@ -1,3 +1,4 @@
+import Features from "@/components/Features/Features";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import SocialProof from "@/components/Social/SocialProof";
@@ -8,6 +9,7 @@ export default function LandingPage() {
       <Navbar />
       <Hero />
       <SocialProof />
+      <Features />
     </div>
   )
 }
