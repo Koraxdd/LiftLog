@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { signup } from "@/actions/auth";
 
-export const RegisterSchema = z.object({
+const RegisterSchema = z.object({
     username: z.string().min(3, "Username must be at least 3 characters"),
     email: z.string().email("Invalid email"),
     password: z.string().min(8, "Password must be at least 8 characters"),
@@ -18,16 +18,25 @@ export const RegisterSchema = z.object({
     path: ["confirmPassword"]
 })
 
-export type RegisterInput = z.infer<typeof RegisterSchema>
+type RegisterInput = z.infer<typeof RegisterSchema>
 
 export default function RegisterForm() {
     const router = useRouter()
-    const { register, handleSubmit, formState: { errors } } = useForm<RegisterInput>({
+    const { register, handleSubmit, setError, formState: { errors } } = useForm<RegisterInput>({
         resolver: zodResolver(RegisterSchema)
     })
     const onSubmit: SubmitHandler<RegisterInput> = async (data) => {
-        await signup(data.username, data.email, data.password)
-        router.push("/login")
+        const result = await signup(data.username, data.email, data.password)
+        if (!result.success) {
+            if (result.emailError) {
+                setError("email", { message: result.emailError })
+            }
+            if (result.userError) {
+                setError("username", { message: result.userError })
+            }
+        } else {
+            router.push("/login")
+        }
     }
 
     return (

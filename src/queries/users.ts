@@ -1,9 +1,17 @@
 import { User } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 
-export async function getUserByEmail(email: string): Promise<User | null> {
+export async function getUserByEmail(email: string): Promise<{ id: string } | null> {
     return await prisma.user.findUnique({
-        where: { email }
+        where: { email },
+        select: { id: true }
+    })
+}
+
+export async function getUserByUsername(username: string): Promise<{ id: string } | null> {
+    return await prisma.user.findUnique({
+        where: { username },
+        select: { id: true }
     })
 }
 
