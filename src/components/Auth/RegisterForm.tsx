@@ -22,7 +22,7 @@ type RegisterInput = z.infer<typeof RegisterSchema>
 
 export default function RegisterForm() {
     const router = useRouter()
-    const { register, handleSubmit, setError, formState: { errors } } = useForm<RegisterInput>({
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<RegisterInput>({
         resolver: zodResolver(RegisterSchema)
     })
     const onSubmit: SubmitHandler<RegisterInput> = async (data) => {
@@ -49,7 +49,7 @@ export default function RegisterForm() {
             {errors.password && <span className="text-[#EF4444] text-sm">{errors.password.message}</span>}
             <Input {...register("confirmPassword")} label="Confirm Password" type="password" placeholder="••••••••" />
             {errors.confirmPassword && <span className="text-[#EF4444] text-sm">{errors.confirmPassword.message}</span>}
-            <Button variant="primary" type="submit">Create Account</Button>
+            <Button variant="primary" type="submit" disabled={isSubmitting}>Create Account</Button>
         </form>
     )
 }

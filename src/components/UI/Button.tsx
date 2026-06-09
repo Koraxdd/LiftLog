@@ -1,6 +1,7 @@
 import clsx from "clsx"
 import Link from "next/link"
 import type { MouseEventHandler, ReactNode } from "react"
+import Spinner from "./Spinner"
 
 type ButtonProps = {
     children: ReactNode
@@ -8,12 +9,14 @@ type ButtonProps = {
     size?: "sm" | "md" | "lg"
     href?: string
     type?: "submit" | "reset" | "button"
+    disabled?: boolean
     onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export default function Button({ children, variant, size="md", href, type="button", onClick }: ButtonProps) {
+export default function Button({ children, variant, size="md", href, type="button", disabled=false, onClick }: ButtonProps) {
     const style = clsx(
-        "rounded-lg font-semibold md:transition-colors cursor-pointer",
+        "rounded-lg font-semibold md:transition-colors flex justify-center items-center gap-2",
+        disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
         size === "sm" && "px-4 py-2",
         size === "md" && "px-6 py-3 text-lg",
         size === "lg" && "px-10 py-4",
@@ -25,6 +28,9 @@ export default function Button({ children, variant, size="md", href, type="butto
     return (
         href ? 
             <Link href={href} className={style}>{children}</Link> :
-            <button type={type} onClick={onClick} className={style}>{children}</button>
+            <button disabled={disabled} type={type} onClick={onClick} className={style}>
+                {disabled ? <Spinner /> : null}
+                {children}
+            </button>
     )
 }
