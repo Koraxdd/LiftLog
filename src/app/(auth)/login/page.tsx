@@ -17,7 +17,7 @@ export default function LoginPage() {
                 </div>
                 <div className="flex flex-col gap-6 border-b border-subtle">
                     <LoginForm />
-                    <p className="font-medium text-center mb-7">Don't have an account? <Link href="/register" className="text-brand">Create one</Link></p>
+                    <p className="font-medium text-center mb-7">Don't have an account? <Link href="/register" className="text-brand md:hover:underline">Create one</Link></p>
                 </div>
                 <div className="flex justify-center mb-6">
                     <Button variant="ghost" size="sm" href="/"><MoveLeft size={13} className="inline-flex" /> Back to Home</Button>

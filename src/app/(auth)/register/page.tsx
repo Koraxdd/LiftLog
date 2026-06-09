@@ -17,7 +17,7 @@ export default function RegisterPage() {
                 </div>
                 <div className="flex flex-col gap-6 border-b border-subtle">
                     <RegisterForm />
-                    <p className="font-medium text-center mb-7">Already have an account? <Link href="/login" className="text-brand">Sign in</Link></p>
+                    <p className="font-medium text-center mb-7">Already have an account? <Link href="/login" className="text-brand md:hover:underline">Sign in</Link></p>
                 </div>
                 <div className="flex justify-center mb-6">
                     <Button variant="ghost" size="sm" href="/"><MoveLeft size={13} className="inline-flex" /> Back to Home</Button>
