@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from "react"
-import Icon from "../../Icon"
+import Icon from "@/components/UI/Icon"
 
 type FeatureCardProps = {
     children: ReactNode
@@ -14,7 +14,7 @@ export default function FeatureCard({ children, title, icon }: FeatureCardProps)
                 <Icon>{icon}</Icon>
             </div>
             <div className="flex flex-col gap-3">
-                <h3 className="text-[#E5E7EB] text-xl font-semibold">{title}</h3>
+                <h3 className="text-text-primary text-xl font-semibold">{title}</h3>
                 <p className="font-medium">{children}</p>
             </div>
         </div>
