@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function RegisterPage() {
     return (
         <main className="bg-linear-to-br from-0% from-brand/6 to-40% to-transparent min-h-screen flex justify-center items-center p-4">
-            <div className="bg-card border border-subtle rounded-2xl w-full flex flex-col gap-6 px-9">
+            <div className="bg-card border border-subtle rounded-2xl w-full flex flex-col gap-6 px-9 md:w-1/4">
                 <div className="mt-8 flex flex-col justify-center items-center gap-3">
                     <Dumbbell 
                         size={65} 
