@@ -1,32 +1,20 @@
-import { withAuth } from "next-auth/middleware"
-import { NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
+import { isAuthPage } from "./utils/isAuthPage"
+import { getToken } from "next-auth/jwt"
 
-export default withAuth(
-    function middleware(req) {
-        const token = req.nextauth.token
-        const isAuthPage = req.nextUrl.pathname.startsWith("/login") ||
-                           req.nextUrl.pathname.startsWith("/register")
+export async function middleware(req: NextRequest) {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+    const isAuth = isAuthPage(req.nextUrl.pathname)
 
-        if (isAuthPage && token) {
-            return NextResponse.redirect(new URL("/dashboard", req.url))
-        }
-    },
-    {
-        callbacks: {
-            authorized({ token, req }) {
-                const isAuthPage = req.nextUrl.pathname.startsWith("/login") ||
-                                   req.nextUrl.pathname.startsWith("/register")
-
-                if (isAuthPage) return true
-                return !!token
-            }
-        },
-        pages: {
-            signIn: "/login"
-        }
+    if (isAuth && token) {
+        return NextResponse.redirect(new URL("/dashboard", req.url))
     }
-)
+
+    if (!isAuth && !token) {
+        return NextResponse.redirect(new URL("/login", req.url))
+    }
+}
 
 export const config = {
-    matcher: ["/dashboard/:path*", "/login", "/register"]
+    matcher: ["/dashboard/:path*", "/login", "/register", "/"]
 }
