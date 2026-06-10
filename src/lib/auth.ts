@@ -37,5 +37,8 @@ export const authOptions: NextAuthOptions = {
             session.user.id = token.id
             return session
         }
+    },
+    pages : {
+        signIn: "/login"
     }
 }

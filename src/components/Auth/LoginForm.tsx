@@ -1,6 +1,6 @@
 "use client"
 
-import { email, z } from "zod"
+import { z } from "zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { Input } from "../UI/Input"
@@ -9,7 +9,7 @@ import { signIn } from "next-auth/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 const LoginSchema = z.object({
-    email: z.string().email("Invalid email"),
+    email: z.string().email(),
     password: z.string()
 })
 
@@ -28,7 +28,7 @@ export default function LoginForm() {
                 redirect: false
             })
             if (result?.error) {
-                console.log(result.error)
+                setError("root", { message: "Invalid email or password" })
             } else {
                 router.push("/dashboard")
             }
@@ -40,8 +40,8 @@ export default function LoginForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
             <Input {...register("email")} label="Email" type="text" placeholder="Email" />
-            {errors.email && <span className="text-[#EF4444] text-sm">{errors.email.message}</span>}
             <Input {...register("password")} label="Password" type="password" placeholder="••••••••" />
+            {errors.root && <span className="text-[#EF4444] text-sm">{errors.root.message}</span>}
             <Button variant="primary" type="submit" disabled={isSubmitting}>Sign In</Button>
         </form>
     )
