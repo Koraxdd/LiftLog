@@ -5,8 +5,8 @@ import { Input } from "../UI/Input";
 import Button from "../UI/Button/Button";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { signup } from "@/actions/auth";
+import { signIn } from "next-auth/react";
 
 const RegisterSchema = z.object({
     username: z.string().min(3, "Username must be at least 3 characters"),
@@ -21,7 +21,6 @@ const RegisterSchema = z.object({
 type RegisterInput = z.infer<typeof RegisterSchema>
 
 export default function RegisterForm() {
-    const router = useRouter()
     const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<RegisterInput>({
         resolver: zodResolver(RegisterSchema)
     })
@@ -35,7 +34,11 @@ export default function RegisterForm() {
                 setError("username", { message: result.userError })
             }
         } else {
-            router.push("/login")
+            await signIn("credentials", {
+                email: data.email,
+                password: data.password,
+                callbackUrl: "/dashboard"
+            })
         }
     }
 
