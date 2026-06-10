@@ -1,4 +1,4 @@
-import Button from "@/components/UI/Button"
+import Button from "@/components/UI/Button/Button"
 import { ArrowRight } from "lucide-react"
 
 export default function CTA() {

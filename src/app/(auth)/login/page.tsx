@@ -1,7 +1,7 @@
 import { Dumbbell, MoveLeft } from "lucide-react"
 import Link from "next/link"
 import LoginForm from "@/components/Auth/LoginForm"
-import Button from "@/components/UI/Button"
+import Button from "@/components/UI/Button/Button"
 
 export default function LoginPage() {
     return (

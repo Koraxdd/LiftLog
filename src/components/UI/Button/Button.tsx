@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import Link from "next/link"
 import type { MouseEventHandler, ReactNode } from "react"
-import Spinner from "./Spinner"
+import Spinner from "../Spinner"
 
 type ButtonProps = {
     children: ReactNode

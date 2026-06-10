@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 import { Input } from "../UI/Input";
-import Button from "../UI/Button";
+import Button from "../UI/Button/Button";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";

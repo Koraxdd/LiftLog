@@ -1,14 +1,48 @@
 "use client"
 
+import { email, z } from "zod"
+import { useForm, type SubmitHandler } from "react-hook-form"
+import { useRouter } from "next/navigation"
 import { Input } from "../UI/Input"
-import Button from "../UI/Button"
+import Button from "../UI/Button/Button"
+import { signIn } from "next-auth/react"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+const LoginSchema = z.object({
+    email: z.string().email("Invalid email"),
+    password: z.string()
+})
+
+type LoginInput = z.infer<typeof LoginSchema>
 
 export default function LoginForm() {
+    const router = useRouter()
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<LoginInput>({
+        resolver: zodResolver(LoginSchema)
+    })
+    const onSubmit: SubmitHandler<LoginInput> = async (data) => {
+        try {
+            const result = await signIn("credentials", {
+                email: data.email,
+                password: data.password,
+                redirect: false
+            })
+            if (result?.error) {
+                console.log(result.error)
+            } else {
+                router.push("/dashboard")
+            }
+        } catch (err) {
+            throw new Error(`Failed to login: ${err}`)
+        }
+    }
+
     return (
-        <form className="flex flex-col gap-3">
-            <Input label="Email" type="email" placeholder="Email" />
-            <Input label="Password" type="password" placeholder="••••••••" />
-            <Button variant="primary" type="submit">Create Account</Button>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+            <Input {...register("email")} label="Email" type="text" placeholder="Email" />
+            {errors.email && <span className="text-[#EF4444] text-sm">{errors.email.message}</span>}
+            <Input {...register("password")} label="Password" type="password" placeholder="••••••••" />
+            <Button variant="primary" type="submit" disabled={isSubmitting}>Sign In</Button>
         </form>
     )
 }

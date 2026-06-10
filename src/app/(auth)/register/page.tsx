@@ -1,5 +1,5 @@
 import RegisterForm from "@/components/Auth/RegisterForm"
-import Button from "@/components/UI/Button";
+import Button from "@/components/UI/Button/Button";
 import { Dumbbell, MoveLeft } from "lucide-react"
 import Link from "next/link";
 
