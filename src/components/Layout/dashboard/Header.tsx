@@ -10,7 +10,7 @@ export default function Header() {
 
     return (
         <>
-            <header className="bg-card border-b border-subtle p-4 relative">
+            <header className="bg-card border-b border-subtle p-4 relative md:hidden">
                 <nav className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                         <Dumbbell

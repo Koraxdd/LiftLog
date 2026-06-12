@@ -3,7 +3,7 @@ import { LayoutDashboard, CirclePlus, History, TrendingUp } from "lucide-react";
 
 export default function FooterNav() {
     return (
-        <footer className="bg-card border-t border-subtle py-4">
+        <footer className="bg-card border-t border-subtle py-4 md:hidden">
             <nav className="flex justify-around items-center">
                 <CustomLink href="/dashboard" variant="mobile">
                     <LayoutDashboard />

@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation"
 type CustomLinkProps = {
     children: ReactNode
     href: string
-    variant: "mobile" | "desktop" | "hamburger"
+    variant: "mobile" | "desktop"
 }
 
 export default function CustomLink({ children, href, variant }: CustomLinkProps) {
@@ -17,7 +17,7 @@ export default function CustomLink({ children, href, variant }: CustomLinkProps)
 
     const style = clsx(
         variant === "mobile" && `flex flex-col justify-around gap-1 items-center font-semibold text-xs ${isActive ? "text-brand" : "text-text-muted"}`,
-        variant === "hamburger" && `flex items-center gap-3 rounded-lg px-4 py-3 font-medium ${isActive ? "text-text-primary bg-brand" : "text-text-muted"}`
+        variant === "desktop" && `transition-colors flex items-center gap-3 rounded-lg px-4 py-3 font-medium ${isActive ? "text-text-primary bg-brand" : "text-text-muted hover:bg-surface"}`
     )
 
     return (

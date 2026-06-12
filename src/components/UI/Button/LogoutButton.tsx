@@ -6,10 +6,11 @@ import { signOut } from "next-auth/react";
 
 type LogoutButtonProps = {
     children: ReactNode
+    size?: "sm" | "md" | "lg"
 }
 
-export default function LogoutButton({ children }: LogoutButtonProps) {
+export default function LogoutButton({ children, size="md" }: LogoutButtonProps) {
     return (
-        <Button variant="primary" onClick={() => signOut({ callbackUrl: "/" })}>{children}</Button>
+        <Button variant="ghost/danger" size={size} onClick={() => signOut({ callbackUrl: "/" })}>{children}</Button>
     )
 }

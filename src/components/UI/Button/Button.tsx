@@ -7,7 +7,7 @@ import Spinner from "../Spinner"
 
 type ButtonProps = {
     children: ReactNode
-    variant: "ghost" | "primary" | "prominent"
+    variant: "ghost" | "primary" | "prominent" | "ghost/danger"
     size?: "sm" | "md" | "lg"
     href?: string
     type?: "submit" | "reset" | "button"
@@ -24,7 +24,8 @@ export default function Button({ children, variant, size="md", href, type="butto
         size === "lg" && "px-10 py-4",
         variant === "ghost" && "text-[#9CA3AF] md:hover:text-[#E5E7EB] md:hover:bg-card",
         variant === "primary" && "text-[#E5E7EB] bg-brand md:hover:bg-brand-dark",
-        variant === "prominent" && "text-surface bg-[#E5E7EB] border border-surface md:hover:bg-white"
+        variant === "prominent" && "text-surface bg-[#E5E7EB] border border-surface md:hover:bg-white",
+        variant === "ghost/danger" && "text-text-muted md:hover:text-[#EF4444] md:hover:bg-surface justify-start"
     )
 
     return (
