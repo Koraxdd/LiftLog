@@ -1,6 +1,7 @@
-import { Dumbbell, LayoutDashboard, CirclePlus, History, TrendingUp, LogOut } from "lucide-react"
+import { Dumbbell, LogOut } from "lucide-react"
 import CustomLink from "@/components/UI/CustomLink"
 import LogoutButton from "@/components/UI/Button/LogoutButton"
+import { navLinks } from "@/lib/links"
 
 export default function Sidebar() {
     return (
@@ -13,22 +14,15 @@ export default function Sidebar() {
                 <h1 className="font-semibold text-xl">LiftLog</h1>
             </div>
             <nav className="flex flex-col gap-2 p-4">
-                <CustomLink href="/dashboard" variant="desktop">
-                    <LayoutDashboard />
-                    Dashboard
-                </CustomLink>
-                <CustomLink href="/dashboard/log" variant="desktop">
-                    <CirclePlus />
-                    Log
-                </CustomLink>
-                <CustomLink href="/dashboard/history" variant="desktop">
-                    <History />
-                    History
-                </CustomLink>
-                <CustomLink href="/dashboard/progress" variant="desktop">
-                    <TrendingUp />
-                    Progress
-                </CustomLink>
+                {navLinks.map(link => {
+                    const Icon = link.icon
+                    return (
+                        <CustomLink key={link.href} href={link.href} variant="desktop">
+                            <Icon />
+                            {link.label}
+                        </CustomLink>
+                    )
+                })}
             </nav>
             <div className="border-t border-subtle p-4 flex flex-col gap-2">
                 <div className="bg-surface rounded-lg flex items-center gap-3 p-4">
