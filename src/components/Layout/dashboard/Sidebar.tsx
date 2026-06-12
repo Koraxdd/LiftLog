@@ -4,7 +4,7 @@ import LogoutButton from "@/components/UI/Button/LogoutButton"
 
 export default function Sidebar() {
     return (
-        <div className="bg-card border-r border-subtle w-1/8">
+        <div className="hidden md:block bg-card border-r border-subtle w-1/8">
             <div className="flex items-center gap-2 border-b border-subtle p-6">
                 <Dumbbell
                     size={40} 
