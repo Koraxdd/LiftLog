@@ -2,10 +2,14 @@ import { Dumbbell, LogOut } from "lucide-react"
 import CustomLink from "@/components/UI/CustomLink"
 import LogoutButton from "@/components/UI/Button/LogoutButton"
 import { navLinks } from "@/lib/links"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
-export default function Sidebar() {
+export default async function Sidebar() {
+    const session = await getServerSession(authOptions)
+
     return (
-        <div className="hidden md:block bg-card border-r border-subtle w-1/8">
+        <div className="hidden md:flex flex-col bg-card border-r border-subtle w-1/7">
             <div className="flex items-center gap-2 border-b border-subtle p-6">
                 <Dumbbell
                     size={40} 
@@ -13,7 +17,7 @@ export default function Sidebar() {
                 />
                 <h1 className="font-semibold text-xl">LiftLog</h1>
             </div>
-            <nav className="flex flex-col gap-2 p-4">
+            <nav className="flex flex-col flex-1 gap-2 p-4">
                 {navLinks.map(link => {
                     const Icon = link.icon
                     return (
@@ -30,8 +34,8 @@ export default function Sidebar() {
                         <h2>AB</h2>
                     </div>
                     <div className="">
-                        <h2>username</h2>
-                        <p className="text-sm">email</p>
+                        <h2>{session?.user.name}</h2>
+                        <p className="text-sm">{session?.user.email}</p>
                     </div>
                 </div>
                 <LogoutButton size="sm">
