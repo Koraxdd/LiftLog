@@ -1,6 +1,6 @@
 "use client"
 
-import type { ReactNode } from "react"
+import type { MouseEventHandler, ReactNode } from "react"
 import Link from "next/link"
 import clsx from "clsx"
 import { usePathname } from "next/navigation"
@@ -9,9 +9,10 @@ type CustomLinkProps = {
     children: ReactNode
     href: string
     variant: "mobile" | "desktop"
+    onClick?: MouseEventHandler<HTMLAnchorElement>
 }
 
-export default function CustomLink({ children, href, variant }: CustomLinkProps) {
+export default function CustomLink({ children, href, variant, onClick }: CustomLinkProps) {
     const path = usePathname()
     const isActive = path === href
 
@@ -21,6 +22,6 @@ export default function CustomLink({ children, href, variant }: CustomLinkProps)
     )
 
     return (
-        <Link href={href} className={style}>{children}</Link>
+        <Link href={href} className={style} onClick={onClick}>{children}</Link>
     )
 }

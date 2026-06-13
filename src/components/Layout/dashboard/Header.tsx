@@ -6,7 +6,7 @@ import { useState } from "react";
 import Button from "@/components/UI/Button/Button";
 
 export default function Header() {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return ( 
         <header className="bg-card border-b border-subtle p-4 relative md:hidden">
@@ -22,7 +22,7 @@ export default function Header() {
                     {isOpen ? <X className="text-white" /> : <Menu className="text-white" />}
                 </Button>
             </nav>
-            <HamburgerMenu isOpen={isOpen} />
+            <HamburgerMenu isOpen={isOpen} onClose={() => setIsOpen(prev => !prev)} />
         </header>
     )
 }
