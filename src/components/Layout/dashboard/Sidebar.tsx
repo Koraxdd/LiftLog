@@ -7,6 +7,7 @@ import { authOptions } from "@/lib/auth"
 
 export default async function Sidebar() {
     const session = await getServerSession(authOptions)
+    const username = session?.user.name as string
 
     return (
         <div className="hidden md:flex flex-col bg-card border-r border-subtle w-1/7">
@@ -31,10 +32,10 @@ export default async function Sidebar() {
             <div className="border-t border-subtle p-4 flex flex-col gap-2">
                 <div className="bg-surface rounded-lg flex items-center gap-3 p-4">
                     <div className="bg-brand rounded-full w-10 h-10 flex justify-center items-center">
-                        <h2>AB</h2>
+                        <h2 className="text-xl">{username[0].toUpperCase()}</h2>
                     </div>
                     <div className="">
-                        <h2>{session?.user.name}</h2>
+                        <h2>{username}</h2>
                         <p className="text-sm">{session?.user.email}</p>
                     </div>
                 </div>
