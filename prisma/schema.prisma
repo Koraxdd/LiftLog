@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  username  String    @unique
-  password  String    
-  workouts  Workout[] 
-  createdAt DateTime  @default(now())
+  id                String              @id @default(uuid())
+  email             String              @unique
+  username          String              @unique
+  password          String    
+  workouts          Workout[] 
+  createdAt         DateTime            @default(now())
+  exerciseTemplates ExerciseTemplate[]
 }
 
 model Workout {
@@ -27,17 +28,30 @@ model Workout {
 }
 
 model Exercise {
-  id        String  @id @default(uuid())
-  name      String
-  workoutId String
-  workout   Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
-  Sets      Set[]
+  id                 String  @id @default(uuid())
+  order              Int
+  exerciseTemplateId String
+  exerciseTemplate   ExerciseTemplate @relation(fields: [exerciseTemplateId], references: [id], onDelete: Restrict)
+  workoutId          String
+  workout            Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  sets               Set[]
 }
 
 model Set {
   id         String   @id @default(uuid())
+  order      Int
   reps       Int
-  weight     Float
+  weight     Float?
   exerciseId String
   exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+}
+
+model ExerciseTemplate {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  muscleGroup String
+  isCustom    Boolean    @default(false)
+  userId      String?
+  user        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercises   Exercise[]
 }
