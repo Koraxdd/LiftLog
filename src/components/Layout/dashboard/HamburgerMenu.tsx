@@ -12,7 +12,7 @@ type HamburgerMenuProps = {
 export default function HamburgerMenu({ isOpen, onClose }: HamburgerMenuProps) {
     return (
         <div className={clsx(
-            "absolute top-full left-0 right-0 overflow-hidden transition-all duration-600 ease-out bg-card border-b border-subtle gap-2",
+            "absolute top-full left-0 right-0 z-50 overflow-hidden transition-all duration-600 ease-out bg-card border-b border-subtle gap-2",
             isOpen ? "max-h-96 pointer-events-auto" : "max-h-0 pointer-events-none"
         )}>
             <div className="flex flex-col gap-2 p-4">

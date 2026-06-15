@@ -12,12 +12,13 @@ type ButtonProps = {
     href?: string
     type?: "submit" | "reset" | "button"
     disabled?: boolean
+    className?: string
     onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export default function Button({ children, variant, size="md", href, type="button", disabled=false, onClick }: ButtonProps) {
+export default function Button({ children, variant, size="md", href, type="button", disabled=false, className, onClick }: ButtonProps) {
     const style = clsx(
-        "rounded-lg font-semibold md:transition-colors flex justify-center items-center gap-2",
+        `rounded-lg font-semibold md:transition-colors flex justify-center items-center gap-2 ${className}`,
         disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
         size === "sm" && "px-4 py-2",
         size === "md" && "px-6 py-3 text-lg",
