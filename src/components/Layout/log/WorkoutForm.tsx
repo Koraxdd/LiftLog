@@ -69,10 +69,10 @@ export default function WorkoutForm() {
                 {fields.map((field, index) => (
                     <ExerciseRow 
                         key={field.id} 
-                        index={index} 
+                        exerciseIndex={index} 
                         control={control} 
                         register={register} 
-                        remove={remove} 
+                        removeExercise={remove} 
                         canDelete={fields.length > 1} 
                     />
                 ))}
