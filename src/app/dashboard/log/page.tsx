@@ -1,9 +1,12 @@
 import WorkoutForm from "@/components/Layout/log/WorkoutForm"
+import { getExercisesFromTemplate } from "@/queries/exercises"
 import { Dumbbell } from "lucide-react"
 
-export default function LogPage() {
+export default async function LogPage() {
+    const exercises = await getExercisesFromTemplate()
+
     return (
-        <div className="flex flex-col gap-8 px-4 py-2">
+        <div className="flex flex-col gap-8 px-4 pt-2 pb-7 md:px-80 md:pt-8">
             <div className="flex items-center gap-3">
                 <Dumbbell
                     size={50} 
@@ -14,7 +17,7 @@ export default function LogPage() {
                     <p className="font-medium">Track your training session</p>
                 </div>
             </div>
-            <WorkoutForm />
+            <WorkoutForm exercises={exercises} />
         </div>
     )
 }

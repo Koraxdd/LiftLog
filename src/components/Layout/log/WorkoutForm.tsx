@@ -21,7 +21,16 @@ const WorkoutSchema = z.object({
 
 export type WorkoutInput = z.infer<typeof WorkoutSchema>
 
-export default function WorkoutForm() {
+export type Exercises = {
+    name: string
+    muscleGroup: string
+}[]
+
+type WorkoutFormProps = {
+    exercises: Exercises
+}
+
+export default function WorkoutForm({ exercises }: WorkoutFormProps) {
     const today = new Date().toISOString().split("T")[0]
 
     const { register, handleSubmit, control, reset } = useForm<WorkoutInput>({
@@ -32,7 +41,7 @@ export default function WorkoutForm() {
                 {
                     templateId: "",
                     sets: [
-                        { reps: 0, weight: 0 }
+                        { reps: undefined, weight: undefined }
                     ]
                 }
             ]
@@ -47,10 +56,12 @@ export default function WorkoutForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-card border border-subtle rounded-lg p-6 flex flex-col gap-6">
-            <Input {...register("name")} label="Workout Name" type="text" placeholder="e.g., Upper Body Day" />
-            <Input {...register("date")} label="Date" type="date" />
-            <div className="flex justify-center items-center">
+        <form onSubmit={handleSubmit(onSubmit)} className="bg-card border border-subtle rounded-lg p-6 flex flex-col gap-6 md:p-8">
+            <div className="flex flex-col gap-6 md:flex-row">
+                <Input {...register("name")} label="Workout Name" type="text" placeholder="e.g., Upper Body Day" className="w-full" />
+                <Input {...register("date")} label="Date" type="date" className="w-full" />
+            </div>
+            <div className="flex justify-center items-center md:justify-between">
                 <div>
                     <h3 className="text-text-primary font-semibold text-xl">Exercises</h3>
                     <p className="text-sm font-medium">Add exercises to your workout</p>
@@ -61,11 +72,11 @@ export default function WorkoutForm() {
                     size="sm" 
                     onClick={() => append({ templateId: "", sets: [{ reps: 0, weight: 0 }]})}
                 >
-                    <CirclePlus />
+                    <CirclePlus className="md:w-5" />
                     Add Exercise
                 </Button>
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 md:pb-2">
                 {fields.map((field, index) => (
                     <ExerciseRow 
                         key={field.id} 
@@ -74,15 +85,15 @@ export default function WorkoutForm() {
                         register={register} 
                         removeExercise={remove} 
                         canDelete={fields.length > 1} 
+                        exercises={exercises}
                     />
                 ))}
             </div>
-            <div className="flex flex-col gap-3 border-t border-subtle pt-6">
+            <div className="flex flex-col gap-3 border-t border-subtle pt-6 md:flex-row md:justify-end">
                 <Button 
                     variant="ghost" 
                     type="button" 
-                    className="border 
-                    border-subtle" 
+                    className="border border-subtle"
                     onClick={() => reset()}
                 >
                     Clear

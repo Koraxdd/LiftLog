@@ -27,7 +27,7 @@ export default function Button({ children, variant, size="md", href, type="butto
         variant === "ghost" && "text-[#9CA3AF] md:hover:text-[#E5E7EB] md:hover:bg-card",
         variant === "primary" && "text-[#E5E7EB] bg-brand md:hover:bg-brand-dark",
         variant === "prominent" && "text-surface bg-[#E5E7EB] border border-surface md:hover:bg-white",
-        variant === "ghost/danger" && "text-text-muted md:hover:text-[#EF4444] md:hover:bg-surface justify-start",
+        variant === "ghost/danger" && "text-text-muted md:hover:text-[#EF4444] justify-start",
         variant === "danger" && "text-white bg-[#EF4444]"
     )
 
