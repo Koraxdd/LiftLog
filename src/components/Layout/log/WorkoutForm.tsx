@@ -23,7 +23,10 @@ export type WorkoutInput = z.infer<typeof WorkoutSchema>
 
 export type Exercises = {
     name: string
+    id: string
     muscleGroup: string
+    isCustom: boolean
+    userId: string | null
 }[]
 
 type WorkoutFormProps = {
