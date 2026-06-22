@@ -6,6 +6,7 @@ import { Input } from "@/components/UI/Input"
 import Button from "@/components/UI/Button/Button"
 import { useForm, useFieldArray, type SubmitHandler } from "react-hook-form"
 import ExerciseRow from "./ExerciseRow"
+import { useState } from "react"
 
 const WorkoutSchema = z.object({
     name: z.string(),
@@ -30,10 +31,11 @@ export type Exercises = {
 }[]
 
 type WorkoutFormProps = {
-    exercises: Exercises
+    initialExercises: Exercises
 }
 
-export default function WorkoutForm({ exercises }: WorkoutFormProps) {
+export default function WorkoutForm({ initialExercises }: WorkoutFormProps) {
+    const [exercises, setExercises] = useState<Exercises>(initialExercises)
     const today = new Date().toISOString().split("T")[0]
 
     const { register, handleSubmit, control, reset } = useForm<WorkoutInput>({
@@ -89,6 +91,7 @@ export default function WorkoutForm({ exercises }: WorkoutFormProps) {
                         removeExercise={remove} 
                         canDelete={fields.length > 1} 
                         exercises={exercises}
+                        onExerciseCreated={(newExercise) => setExercises(prev => [...prev, newExercise])}
                     />
                 ))}
             </div>

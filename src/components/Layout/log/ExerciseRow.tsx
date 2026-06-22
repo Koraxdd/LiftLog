@@ -7,6 +7,7 @@ import SetRow from "./SetRow"
 import clsx from "clsx"
 import { useState } from "react"
 import ExerciseDropdown from "./ExerciseDropdown"
+import { ExerciseTemplate } from "@/generated/prisma/client"
 
 type ExerciseRowProps = {
     exerciseIndex: number
@@ -15,9 +16,10 @@ type ExerciseRowProps = {
     removeExercise: UseFieldArrayRemove
     canDelete: boolean
     exercises: Exercises
+    onExerciseCreated: (newExercise: ExerciseTemplate) => void
 }
 
-export default function ExerciseRow({ exerciseIndex, control, register, removeExercise, canDelete, exercises }: ExerciseRowProps) {
+export default function ExerciseRow({ exerciseIndex, control, register, removeExercise, canDelete, exercises, onExerciseCreated }: ExerciseRowProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const { fields, append, remove } = useFieldArray<WorkoutInput>({
         control,
@@ -59,6 +61,7 @@ export default function ExerciseRow({ exerciseIndex, control, register, removeEx
                                 field.onChange(id)
                                 setIsOpen(false)
                             }} 
+                            onExerciseCreated={onExerciseCreated}
                         />
                     </div>
                     )
