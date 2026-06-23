@@ -1,6 +1,6 @@
 import { Input } from "@/components/UI/Input"
 import Button from "@/components/UI/Button/Button"
-import { type Control, Controller, useFieldArray, type UseFieldArrayRemove, type UseFormRegister } from "react-hook-form"
+import { type Control, Controller, type FieldErrors, useFieldArray, type UseFieldArrayRemove, type UseFormRegister } from "react-hook-form"
 import type { Exercises, WorkoutInput } from "./WorkoutForm"
 import { CirclePlus, Trash2 } from "lucide-react"
 import SetRow from "./SetRow"
@@ -17,9 +17,10 @@ type ExerciseRowProps = {
     canDelete: boolean
     exercises: Exercises
     onExerciseCreated: (newExercise: ExerciseTemplate) => void
+    errors: FieldErrors<WorkoutInput>
 }
 
-export default function ExerciseRow({ exerciseIndex, control, register, removeExercise, canDelete, exercises, onExerciseCreated }: ExerciseRowProps) {
+export default function ExerciseRow({ exerciseIndex, control, register, removeExercise, canDelete, exercises, onExerciseCreated, errors }: ExerciseRowProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const { fields, append, remove } = useFieldArray<WorkoutInput>({
         control,
@@ -36,34 +37,39 @@ export default function ExerciseRow({ exerciseIndex, control, register, removeEx
 
                     return (
                         <div className="flex flex-col relative">
-                        <div className="flex items-center gap-4">
-                            <Input 
-                                type="text" 
-                                placeholder="Select or type exercise name" 
-                                value={selected?.name || ""}
-                                readOnly={true} 
-                                onClick={() => setIsOpen(prev => !prev)} 
-                                className="flex-1 min-w-0" 
+                            <div className="flex items-center gap-4">
+                                <div className="min-w-0 flex flex-col md:w-full gap-2">
+                                    <Input 
+                                        type="text" 
+                                        placeholder="Select or type exercise name" 
+                                        value={selected?.name || ""}
+                                        readOnly={true} 
+                                        onClick={() => setIsOpen(prev => !prev)} 
+                                    />
+                                    {errors.exercises?.[exerciseIndex]?.templateId && 
+                                        <span className="text-[#EF4444] text-sm">
+                                            {errors.exercises?.[exerciseIndex]?.templateId?.message}
+                                        </span>}
+                                </div>
+                                {canDelete && <Button 
+                                                variant="danger" 
+                                                size="sm" 
+                                                className="hover:bg-[#DC2626]" 
+                                                onClick={() => removeExercise(exerciseIndex)}
+                                            >
+                                                    <Trash2 size={20} />
+                                            </Button>}
+                            </div>
+                            <ExerciseDropdown 
+                                isOpen={isOpen} 
+                                exercises={exercises} 
+                                onSelect={(id) => {
+                                    field.onChange(id)
+                                    setIsOpen(false)
+                                }} 
+                                onExerciseCreated={onExerciseCreated}
                             />
-                            {canDelete && <Button 
-                                            variant="danger" 
-                                            size="sm" 
-                                            className="hover:bg-[#DC2626]" 
-                                            onClick={() => removeExercise(exerciseIndex)}
-                                          >
-                                                <Trash2 size={20} />
-                                          </Button>}
                         </div>
-                        <ExerciseDropdown 
-                            isOpen={isOpen} 
-                            exercises={exercises} 
-                            onSelect={(id) => {
-                                field.onChange(id)
-                                setIsOpen(false)
-                            }} 
-                            onExerciseCreated={onExerciseCreated}
-                        />
-                    </div>
                     )
                 }}
             />
@@ -84,6 +90,7 @@ export default function ExerciseRow({ exerciseIndex, control, register, removeEx
                         register={register} 
                         removeSet={remove} 
                         canDelete={fields.length > 1} 
+                        errors={errors}
                     />
                 ))}
             </div>

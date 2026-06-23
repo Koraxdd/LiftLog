@@ -64,6 +64,7 @@ export default function ExerciseDropdown({ isOpen, exercises, onSelect, onExerci
                                 <option value="Back">Back</option>
                                 <option value="Legs">Legs</option>
                                 <option value="Arms">Arms</option>
+                                <option value="Shoulders">Shoulders</option>
                             </select>
                         </div>
                     )}

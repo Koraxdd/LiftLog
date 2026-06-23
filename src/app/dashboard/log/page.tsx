@@ -3,10 +3,15 @@ import { authOptions } from "@/lib/auth"
 import { getExercisesFromTemplate } from "@/queries/exercises"
 import { Dumbbell } from "lucide-react"
 import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
 export default async function LogPage() {
     const session = await getServerSession(authOptions)
-    const userId = session?.user.id as string
+    const userId = session?.user.id
+    if (!userId) {
+        redirect("/login")
+    }
+    
     const exercises = await getExercisesFromTemplate(userId)
 
     return (
