@@ -4,7 +4,7 @@ import Button from "@/components/UI/Button/Button"
 export default function Hero() {
     return (
         <section className="flex flex-col justify-center items-center text-center px-6 gap-7 md:w-1/2 md:mx-auto md:gap-8">
-            <div className="flex justify-center items-center gap-2 text-brand bg-brand/10 text-sm font-medium border border-brand-dark rounded-full px-4 py-2 mt-20">
+            <div className="flex justify-center items-center gap-2 text-brand bg-brand/10 text-sm font-medium border border-brand-dark/40 rounded-full px-4 py-2 mt-20">
                 <Zap size={16} />
                 <span>The Future of Fitness Tracking</span>
             </div>

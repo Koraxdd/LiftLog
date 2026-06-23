@@ -34,8 +34,8 @@ export default async function Sidebar() {
                     <div className="bg-brand rounded-full w-10 h-10 flex justify-center items-center">
                         <h2 className="text-xl">{username[0].toUpperCase()}</h2>
                     </div>
-                    <div className="">
-                        <h2>{username}</h2>
+                    <div>
+                        <h2 className="font-medium">{username}</h2>
                         <p className="text-sm">{session?.user.email}</p>
                     </div>
                 </div>

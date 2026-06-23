@@ -11,6 +11,6 @@ type LogoutButtonProps = {
 
 export default function LogoutButton({ children, size="md" }: LogoutButtonProps) {
     return (
-        <Button variant="ghost/danger" size={size} onClick={() => signOut({ callbackUrl: "/" })}>{children}</Button>
+        <Button variant="ghost/danger" className="md:hover:bg-surface" size={size} onClick={() => signOut({ callbackUrl: "/" })}>{children}</Button>
     )
 }
