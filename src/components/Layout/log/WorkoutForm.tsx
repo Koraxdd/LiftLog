@@ -17,8 +17,8 @@ const WorkoutSchema = z.object({
     exercises: z.array(z.object({
         templateId: z.string().min(1, "Please select an exercise"),
         sets: z.array(z.object({
-            reps: z.number().min(1, "Must be at least 1"),
-            weight: z.number().min(0)
+            reps: z.number("Please enter a number").min(1, "Must be at least 1"),
+            weight: z.number("Please enter a number").min(0, "Can't be lower than 0")
         }))
     }))
 })
