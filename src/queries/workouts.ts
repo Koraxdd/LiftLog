@@ -26,3 +26,17 @@ export async function createWorkout(workout: WorkoutInput, userId: string): Prom
         }
     })
 }
+
+export async function getAllWorkoutsByUserId(userId: string) {
+    return await prisma.workout.findMany({
+        where: { userId },
+        include: {
+            exercises: {
+                include: {
+                    sets: true
+                }
+            }
+        },
+        orderBy: { date: "desc" }
+    })
+}
