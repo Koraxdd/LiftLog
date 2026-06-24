@@ -3,6 +3,7 @@ import Chip from "@/components/UI/Chip"
 import { getExerciseByTemplateId } from "@/queries/exercises"
 import { calculateSets } from "@/utils/calculateSets"
 import { calculateVolume } from "@/utils/calculateVolume"
+import { ChevronDown } from "lucide-react"
 
 type WorkoutCardProps = {
     workout: Workout
@@ -12,7 +13,10 @@ export default function WorkoutCard({ workout }: WorkoutCardProps) {
     return (
         <div className="bg-card border border-subtle rounded-lg p-6">
             <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-semibold">{workout.name}</h2>
+                <div className="flex items-center gap-4">
+                    <h2 className="text-xl font-semibold">{workout.name}</h2>
+                    <ChevronDown size={20} className="text-text-muted" />
+                </div>
                 <div className="flex gap-3 text-text-muted text-sm">
                     <p>{new Date(workout.date).toISOString().split("T")[0]}</p>
                     <span>•</span>
