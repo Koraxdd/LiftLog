@@ -7,7 +7,7 @@ import Spinner from "../Spinner"
 
 type ButtonProps = {
     children: ReactNode
-    variant: "ghost" | "primary" | "prominent" | "ghost/danger" | "danger"
+    variant?: "ghost" | "primary" | "prominent" | "ghost/danger" | "danger"
     size?: "xs" | "sm" | "md" | "lg"
     href?: string
     type?: "submit" | "reset" | "button"

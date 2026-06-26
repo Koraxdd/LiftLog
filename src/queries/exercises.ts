@@ -22,9 +22,3 @@ export async function createExerciseTemplate(name: string, muscleGroup: string, 
         }
     })
 }
-
-export async function getExerciseByTemplateId(templateId: string): Promise<ExerciseTemplate | null> {
-    return await prisma.exerciseTemplate.findFirst({
-        where: { id: templateId }
-    })
-}

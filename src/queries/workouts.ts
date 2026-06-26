@@ -33,6 +33,7 @@ export async function getAllWorkoutsByUserId(userId: string) {
         include: {
             exercises: {
                 include: {
+                    exerciseTemplate: true,
                     sets: true
                 }
             }
