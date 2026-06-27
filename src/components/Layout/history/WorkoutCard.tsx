@@ -1,5 +1,3 @@
-"use client"
-
 import type { Workout } from "@/app/dashboard/history/page"
 import Button from "@/components/UI/Button/Button"
 import Chip from "@/components/UI/Chip"

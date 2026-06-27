@@ -1,5 +1,4 @@
-import WorkoutCard from "@/components/Layout/history/WorkoutCard";
-import { Input } from "@/components/UI/Input";
+import WorkoutList from "@/components/Layout/history/WorkoutList";
 import { authOptions } from "@/lib/auth";
 import { getAllWorkoutsByUserId } from "@/queries/workouts";
 import { History } from "lucide-react";
@@ -29,18 +28,7 @@ export default async function HistoryPage() {
                     <p className="font-medium">View and manage all your workouts</p>
                 </div>
             </div>
-            <div className="bg-card border border-subtle p-4 rounded-lg flex flex-col gap-4">
-                <Input type="text" placeholder="Search workouts..." />
-                <Input type="date" />
-            </div>
-            <div className="flex flex-col gap-4">
-                {workouts.map(workout => (
-                    <WorkoutCard 
-                        key={workout.id} 
-                        workout={workout}
-                    />
-                ))}
-            </div>
+            <WorkoutList workouts={workouts} />
         </div>
     )
 }
