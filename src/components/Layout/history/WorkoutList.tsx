@@ -3,6 +3,7 @@
 import { Workout } from "@/app/dashboard/history/page"
 import WorkoutCard from "@/components/Layout/history/WorkoutCard";
 import { Input } from "@/components/UI/Input";
+import { formatDate } from "@/utils/formatDate";
 import { useState } from "react";
 
 type WorkoutListProps = {
@@ -12,16 +13,22 @@ type WorkoutListProps = {
 export default function WorkoutList({ workouts }: WorkoutListProps) {
     const [searchText, setSearchText] = useState<string>("")
     const [dateFilter, setDateFilter] = useState<string>("")
-    const filteredWorkouts = workouts.filter(workout => workout.name.toLowerCase().includes(searchText.toLowerCase()))
+    const filteredWorkouts = workouts.filter(workout => {
+        const matchedText = workout.name.toLowerCase().includes(searchText.toLowerCase())
+        const matchedDate = dateFilter ? formatDate(workout.date) === dateFilter : true
+
+        return matchedText && matchedDate
+    })
 
     return (
         <>
-            <div className="bg-card border border-subtle p-4 rounded-lg flex flex-col gap-4">
+            <div className="bg-card border border-subtle p-4 rounded-lg flex flex-col gap-4 md:flex-row">
                 <Input 
                     type="text" 
                     placeholder="Search workouts..." 
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
+                    className="w-full"
                 />
                 <Input 
                     type="date" 
