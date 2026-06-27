@@ -6,6 +6,7 @@ import { calculateVolume } from "@/utils/calculateVolume"
 import { ChevronDown, ChevronUp, Pen, Trash2 } from "lucide-react"
 import { useState } from "react"
 import WorkoutCardDropdown from "./WorkoutCardDropdown"
+import { formatDate } from "@/utils/formatDate"
 
 type WorkoutCardProps = {
     workout: Workout
@@ -24,7 +25,7 @@ export default function WorkoutCard({ workout }: WorkoutCardProps) {
                                 <ChevronDown size={20} className="text-text-muted" />}
                     </div>
                     <div className="flex gap-3 text-text-muted text-sm">
-                        <p>{new Date(workout.date).toISOString().split("T")[0]}</p>
+                        <p>{formatDate(workout.date)}</p>
                         <span>•</span>
                         <p>{workout.exercises.length} exercises</p>
                         <span>•</span>

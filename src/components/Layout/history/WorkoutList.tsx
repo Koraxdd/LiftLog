@@ -10,7 +10,8 @@ type WorkoutListProps = {
 }
 
 export default function WorkoutList({ workouts }: WorkoutListProps) {
-    const [searchText, setSearchText] = useState<string>("") 
+    const [searchText, setSearchText] = useState<string>("")
+    const [dateFilter, setDateFilter] = useState<string>("")
     const filteredWorkouts = workouts.filter(workout => workout.name.toLowerCase().includes(searchText.toLowerCase()))
 
     return (
@@ -24,6 +25,8 @@ export default function WorkoutList({ workouts }: WorkoutListProps) {
                 />
                 <Input 
                     type="date" 
+                    value={dateFilter}
+                    onChange={(e) => setDateFilter(e.target.value)}
                 />
             </div>
             <div className="flex flex-col gap-4">
