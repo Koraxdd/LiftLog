@@ -41,3 +41,9 @@ export async function getAllWorkoutsByUserId(userId: string) {
         orderBy: { date: "desc" }
     })
 }
+
+export async function deleteWorkoutById(workoutId: string) {
+    return await prisma.workout.delete({
+        where: { id: workoutId }
+    })
+}

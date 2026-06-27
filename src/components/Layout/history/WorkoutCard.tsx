@@ -7,6 +7,8 @@ import { ChevronDown, ChevronUp, Pen, Trash2 } from "lucide-react"
 import { useState } from "react"
 import WorkoutCardDropdown from "./WorkoutCardDropdown"
 import { formatDate } from "@/utils/formatDate"
+import { deleteWorkout } from "@/actions/workouts"
+import { useRouter } from "next/navigation";
 
 type WorkoutCardProps = {
     workout: Workout
@@ -14,6 +16,8 @@ type WorkoutCardProps = {
 
 export default function WorkoutCard({ workout }: WorkoutCardProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const router = useRouter()
+
 
     return (
         <div className="flex flex-col gap-4 bg-card border border-subtle rounded-lg px-6 pt-6 transition-colors hover:bg-surface md:cursor-pointer" onClick={() => setIsOpen(prev => !prev)}>
@@ -40,11 +44,22 @@ export default function WorkoutCard({ workout }: WorkoutCardProps) {
                         <Chip variant="stat">{calculateVolume(workout)} kg total</Chip>
                     </div>
                 </div>
-                <div className="flex" onClick={(e) => e.stopPropagation()}>
-                    <Button variant="ghost" size="sm">
+                <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                    <Button 
+                        variant="ghost" 
+                        size="xs" 
+                        className="hover:bg-card px-3 py-1.5"
+                    >
                         <Pen size={16} />
                     </Button>
-                    <Button size="sm" className="transition-colors hover:bg-[#EF4444]/10 text-[#EF4444] hover:text-white">
+                    <Button 
+                        size="xs" 
+                        className="transition-colors hover:bg-[#EF4444]/10 text-[#EF4444] hover:text-white px-3 py-1.5"
+                        onClick={async () => {
+                            await deleteWorkout(workout.id)
+                            router.refresh()
+                        }}
+                    >
                         <Trash2 size={16} />
                     </Button>
                 </div>
