@@ -19,7 +19,7 @@ export default async function HistoryPage() {
     const exercises = await getExercisesFromTemplate(userId)
 
     return (
-        <div className="flex flex-col gap-8 px-4 pt-2 pb-7 md:px-80 md:pt-8">
+        <div className="flex flex-col gap-8 px-4 pt-2 pb-7 md:px-65 md:pt-8">
             <div className="flex items-center gap-3">
                 <History
                     size={50} 
