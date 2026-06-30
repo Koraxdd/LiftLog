@@ -30,7 +30,7 @@ export default async function Sidebar() {
                 })}
             </nav>
             <div className="border-t border-subtle p-4 flex flex-col gap-2">
-                <div className="bg-surface rounded-lg flex items-center gap-3 p-4">
+                <div className="bg-surface rounded-lg flex items-center gap-3 px-4 py-3">
                     <div className="bg-brand rounded-full w-10 h-10 flex justify-center items-center">
                         <h2 className="text-xl">{username[0].toUpperCase()}</h2>
                     </div>
