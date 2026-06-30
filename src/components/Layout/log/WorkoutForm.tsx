@@ -10,6 +10,7 @@ import { useState } from "react"
 import { addWorkout } from "@/actions/workouts"
 import { zodResolver } from "@hookform/resolvers/zod"
 import clsx from "clsx"
+import type { Workout } from "@/app/dashboard/history/page"
 
 const WorkoutSchema = z.object({
     name: z.string().min(1, "Workout name is required"),
@@ -35,9 +36,10 @@ export type Exercises = {
 
 type WorkoutFormProps = {
     initialExercises: Exercises
+    workout?: Workout
 }
 
-export default function WorkoutForm({ initialExercises }: WorkoutFormProps) {
+export default function WorkoutForm({ initialExercises, workout }: WorkoutFormProps) {
     const [exercises, setExercises] = useState<Exercises>(initialExercises)
     const today = new Date().toISOString().split("T")[0]
 
@@ -68,7 +70,10 @@ export default function WorkoutForm({ initialExercises }: WorkoutFormProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-card border border-subtle rounded-lg p-6 flex flex-col gap-6 md:p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className={clsx(
+            "flex flex-col gap-6",
+            !workout && "bg-card border border-subtle rounded-lg p-6 md:p-8"
+        )}>
             <div className={clsx("flex flex-col md:flex-row", errors.name ? "gap-3" : "gap-6")}>
                 <div className="flex flex-col gap-3 w-full">
                     <Input {...register("name")} label="Workout Name" type="text" placeholder="e.g., Upper Body Day" className="w-full" />
@@ -121,7 +126,7 @@ export default function WorkoutForm({ initialExercises }: WorkoutFormProps) {
                     type="submit"
                     disabled={isSubmitting}
                 >
-                    Log Workout
+                    {workout ? "Update Workout" : "Log Workout"}
                 </Button>
             </div>
         </form>

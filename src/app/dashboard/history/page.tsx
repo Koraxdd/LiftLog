@@ -1,5 +1,6 @@
 import WorkoutList from "@/components/Layout/history/WorkoutList";
 import { authOptions } from "@/lib/auth";
+import { getExercisesFromTemplate } from "@/queries/exercises";
 import { getAllWorkoutsByUserId } from "@/queries/workouts";
 import { History } from "lucide-react";
 import { getServerSession } from "next-auth";
@@ -13,8 +14,9 @@ export default async function HistoryPage() {
     if (!userId) {
         redirect("/login")
     }
-
+        
     const workouts = await getAllWorkoutsByUserId(userId)
+    const exercises = await getExercisesFromTemplate(userId)
 
     return (
         <div className="flex flex-col gap-8 px-4 pt-2 pb-7 md:px-80 md:pt-8">
@@ -28,7 +30,7 @@ export default async function HistoryPage() {
                     <p className="font-medium">View and manage all your workouts</p>
                 </div>
             </div>
-            <WorkoutList workouts={workouts} />
+            <WorkoutList initialExercises={exercises} workouts={workouts} />
         </div>
     )
 }

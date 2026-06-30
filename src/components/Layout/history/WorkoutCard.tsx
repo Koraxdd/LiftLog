@@ -10,24 +10,26 @@ import { formatDate } from "@/utils/formatDate"
 import { deleteWorkout } from "@/actions/workouts"
 import { useRouter } from "next/navigation";
 import Modal from "@/components/UI/Modal"
+import WorkoutForm, { type Exercises } from "../log/WorkoutForm"
 
 type WorkoutCardProps = {
+    initialExercises: Exercises
     workout: Workout
 }
 
-export default function WorkoutCard({ workout }: WorkoutCardProps) {
+export default function WorkoutCard({ initialExercises, workout }: WorkoutCardProps) {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+    const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
     const router = useRouter()
 
     return (
         <>
-        
             <div 
-                className="flex flex-col gap-4 bg-card border border-subtle rounded-lg px-6 pt-6 transition-colors hover:bg-surface md:cursor-pointer" 
+                className="flex flex-col gap-4 bg-card border border-subtle rounded-lg px-6 pt-6 transition-colors hover:bg-surface" 
                 onClick={() => setIsDropdownOpen(prev => !prev)}
             >
-                <div className="flex flex-col gap-4 md:flex-row md:justify-between">
+                <div className="flex flex-col gap-4 md:flex-row md:justify-between cursor-pointer">
                     <div className="flex flex-col gap-3">
                         <div className="flex items-center gap-4">
                             <h2 className="text-xl font-semibold">{workout.name}</h2>
@@ -55,13 +57,14 @@ export default function WorkoutCard({ workout }: WorkoutCardProps) {
                             variant="ghost" 
                             size="xs" 
                             className="hover:bg-card px-3 py-1.5"
+                            onClick={() => setIsEditModalOpen(true)}
                         >
                             <Pen size={16} />
                         </Button>
                         <Button 
                             size="xs" 
                             className="transition-colors hover:bg-[#EF4444]/10 text-[#EF4444] hover:text-white px-3 py-1.5"
-                            onClick={() => setIsModalOpen(true)}
+                            onClick={() => setIsDeleteModalOpen(true)}
                         >
                             <Trash2 size={16} />
                         </Button>
@@ -69,10 +72,8 @@ export default function WorkoutCard({ workout }: WorkoutCardProps) {
                 </div>
                 <WorkoutCardDropdown workout={workout} isOpen={isDropdownOpen} />
             </div>
-            {isModalOpen && 
-                <Modal
-                    onClose={() => setIsModalOpen(false)}
-                >
+            {isDeleteModalOpen && 
+                <Modal onClose={() => setIsDeleteModalOpen(false)}>
                     <div className="flex flex-col text-center gap-2">
                         <h2 className="font-semibold text-xl">Delete Workout</h2>
                         <p className="font-medium">Are you sure? This can't be undone.</p>
@@ -85,7 +86,7 @@ export default function WorkoutCard({ workout }: WorkoutCardProps) {
                             onClick={async () => {
                                 await deleteWorkout(workout.id)
                                 router.refresh()
-                                setIsModalOpen(false)
+                                setIsDeleteModalOpen(false)
                             }}
                         >
                             Delete
@@ -94,13 +95,16 @@ export default function WorkoutCard({ workout }: WorkoutCardProps) {
                             variant="ghost"
                             size="sm"
                             className="border border-subtle"
-                            onClick={() => setIsModalOpen(false)}
+                            onClick={() => setIsDeleteModalOpen(false)}
                         >
                             Cancel
                         </Button>
                     </div>
                 </Modal>}
-            
+            {isEditModalOpen && 
+                <Modal onClose={() => setIsEditModalOpen(false)}>
+                    <WorkoutForm initialExercises={initialExercises} workout={workout} />
+                </Modal>}                               
         </>
     )
 }

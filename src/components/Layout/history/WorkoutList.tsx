@@ -5,12 +5,14 @@ import WorkoutCard from "@/components/Layout/history/WorkoutCard";
 import { Input } from "@/components/UI/Input";
 import { formatDate } from "@/utils/formatDate";
 import { useState } from "react";
+import { type Exercises } from "../log/WorkoutForm";
 
 type WorkoutListProps = {
+    initialExercises: Exercises
     workouts: Workout[]
 }
 
-export default function WorkoutList({ workouts }: WorkoutListProps) {
+export default function WorkoutList({ initialExercises, workouts }: WorkoutListProps) {
     const [searchText, setSearchText] = useState<string>("")
     const [dateFilter, setDateFilter] = useState<string>("")
     const filteredWorkouts = workouts.filter(workout => {
@@ -40,6 +42,7 @@ export default function WorkoutList({ workouts }: WorkoutListProps) {
                 {filteredWorkouts.map(workout => (
                     <WorkoutCard 
                         key={workout.id} 
+                        initialExercises={initialExercises}
                         workout={workout}
                     />
                 ))}
