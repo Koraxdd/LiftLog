@@ -30,9 +30,9 @@ export default function WorkoutCardDropdown({ workout, isOpen }: WorkoutCardDrop
                                     <div className="text-brand bg-brand/10 border border-brand-dark/40 font-medium text-sm w-6 h-6 rounded-full ml-2 flex justify-center items-center">
                                         {set.order + 1}
                                     </div>
-                                    <p>{set.reps}</p>
-                                    <p>{set.weight}</p>
-                                    <p>{reps * weight} kg</p>
+                                    <span className="text-text-primary">{set.reps}</span>
+                                    <span className="text-text-primary">{set.weight}</span>
+                                    <span className="text-text-muted">{reps * weight} kg</span>
                                 </div>
                             )
                         })}
