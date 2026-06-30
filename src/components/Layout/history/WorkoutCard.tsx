@@ -103,7 +103,7 @@ export default function WorkoutCard({ initialExercises, workout }: WorkoutCardPr
                 </Modal>}
             {isEditModalOpen && 
                 <Modal onClose={() => setIsEditModalOpen(false)}>
-                    <WorkoutForm initialExercises={initialExercises} workout={workout} />
+                    <WorkoutForm initialExercises={initialExercises} workout={workout} onClose={() => setIsEditModalOpen(false)} />
                 </Modal>}                               
         </>
     )
