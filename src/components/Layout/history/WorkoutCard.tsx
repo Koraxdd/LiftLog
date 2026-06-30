@@ -25,11 +25,8 @@ export default function WorkoutCard({ initialExercises, workout }: WorkoutCardPr
 
     return (
         <>
-            <div 
-                className="flex flex-col gap-4 bg-card border border-subtle rounded-lg px-6 pt-6 transition-colors hover:bg-surface" 
-                onClick={() => setIsDropdownOpen(prev => !prev)}
-            >
-                <div className="flex flex-col gap-4 md:flex-row md:justify-between cursor-pointer">
+            <div className="flex flex-col gap-4 bg-card border border-subtle rounded-lg px-6 pt-6 transition-colors hover:bg-surface">
+                <div className="flex flex-col gap-4 md:flex-row md:justify-between cursor-pointer" onClick={() => setIsDropdownOpen(prev => !prev)}>
                     <div className="flex flex-col gap-3">
                         <div className="flex items-center gap-4">
                             <h2 className="text-xl font-semibold">{workout.name}</h2>
