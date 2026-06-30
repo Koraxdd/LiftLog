@@ -10,7 +10,7 @@ export default async function Sidebar() {
     const username = session?.user.name as string
 
     return (
-        <div className="hidden md:flex flex-col bg-card border-r border-subtle w-1/7">
+        <div className="hidden fixed h-full md:flex flex-col bg-card border-r border-subtle w-64">
             <div className="flex items-center gap-2 border-b border-subtle p-6">
                 <Dumbbell
                     size={40} 
