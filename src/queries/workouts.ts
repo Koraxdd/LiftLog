@@ -26,3 +26,50 @@ export async function createWorkout(workout: WorkoutInput, userId: string): Prom
         }
     })
 }
+
+export async function getAllWorkoutsByUserId(userId: string) {
+    return await prisma.workout.findMany({
+        where: { userId },
+        include: {
+            exercises: {
+                include: {
+                    exerciseTemplate: true,
+                    sets: true
+                }
+            }
+        },
+        orderBy: { date: "desc" }
+    })
+}
+
+export async function deleteWorkoutById(workoutId: string) {
+    return await prisma.workout.delete({
+        where: { id: workoutId }
+    })
+}
+
+export async function updateWorkout(workout: WorkoutInput, workoutId: string) {
+    const { name, date, exercises } = workout
+
+    return await prisma.workout.update({
+        where: { id: workoutId },
+        data: {
+            name,
+            date: new Date(date),
+            exercises: {
+                deleteMany: {},
+                create: exercises.map((exercise, exerciseIndex) => ({
+                    exerciseTemplateId: exercise.templateId,
+                    order: exerciseIndex,
+                    sets: {
+                        create: exercise.sets.map((set, setIndex) => ({
+                            reps: set.reps,
+                            weight: set.weight,
+                            order: setIndex
+                        }))
+                    }
+                }))
+            }
+        }
+    })
+}

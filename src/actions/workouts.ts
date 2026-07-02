@@ -2,7 +2,7 @@
 
 import { WorkoutInput } from "@/components/Layout/log/WorkoutForm";
 import { authOptions } from "@/lib/auth";
-import { createWorkout } from "@/queries/workouts";
+import { createWorkout, deleteWorkoutById, updateWorkout } from "@/queries/workouts";
 import { getServerSession } from "next-auth";
 
 export async function addWorkout(workout: WorkoutInput) {
@@ -16,4 +16,12 @@ export async function addWorkout(workout: WorkoutInput) {
     } catch (err) {
         throw new Error("Invalid data")
     }
+}
+
+export async function deleteWorkout(workoutId: string) {
+    await deleteWorkoutById(workoutId)
+}
+
+export async function editWorkout(workout: WorkoutInput, workoutId: string) {
+    await updateWorkout(workout, workoutId)
 }

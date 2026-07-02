@@ -3,7 +3,7 @@ import { navLinks } from "@/lib/links";
 
 export default function FooterNav() {
     return (
-        <footer className="bg-card border-t border-subtle py-4 md:hidden">
+        <footer className="bg-card border-t border-subtle py-4 sticky bottom-0 z-50 md:hidden">
             <nav className="flex justify-around items-center">
                 {navLinks.map(link => {
                     const Icon = link.icon

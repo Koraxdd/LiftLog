@@ -18,7 +18,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="flex flex-col min-h-screen md:flex-row">
             <Header />
             <Sidebar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 md:ml-64">{children}</main>
             <FooterNav />
         </div>
     )

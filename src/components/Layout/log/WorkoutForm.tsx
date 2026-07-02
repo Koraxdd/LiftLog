@@ -7,9 +7,12 @@ import Button from "@/components/UI/Button/Button"
 import { useForm, useFieldArray, type SubmitHandler } from "react-hook-form"
 import ExerciseRow from "./ExerciseRow"
 import { useState } from "react"
-import { addWorkout } from "@/actions/workouts"
+import { addWorkout, editWorkout } from "@/actions/workouts"
 import { zodResolver } from "@hookform/resolvers/zod"
 import clsx from "clsx"
+import type { Workout } from "@/app/dashboard/history/page"
+import { formatDate } from "@/utils/formatDate"
+import { useRouter } from "next/navigation"
 
 const WorkoutSchema = z.object({
     name: z.string().min(1, "Workout name is required"),
@@ -35,24 +38,40 @@ export type Exercises = {
 
 type WorkoutFormProps = {
     initialExercises: Exercises
+    workout?: Workout
+    onClose?: () => void
 }
 
-export default function WorkoutForm({ initialExercises }: WorkoutFormProps) {
+export default function WorkoutForm({ initialExercises, workout, onClose }: WorkoutFormProps) {
     const [exercises, setExercises] = useState<Exercises>(initialExercises)
     const today = new Date().toISOString().split("T")[0]
+    const router = useRouter()
+
+    const defaultWorkout = workout ? {
+        name: workout.name,
+        date: formatDate(workout.date),
+        exercises: workout.exercises.map(exercise => (
+            {
+                templateId: exercise.exerciseTemplateId,
+                sets: exercise.sets.map(set => (
+                    { reps: set.reps, weight: set.weight ?? 0 }
+                ))
+            }
+        ))
+    } : {
+        name: "",
+        date: today,
+        exercises: [{
+            templateId: "",
+            sets: [
+                { reps: undefined, weight: undefined }
+            ]
+        }]
+    }
 
     const { register, handleSubmit, control, reset, setError, formState: { errors, isSubmitting } } = useForm<WorkoutInput>({
         resolver: zodResolver(WorkoutSchema),
-        defaultValues: {
-            name: "",
-            date: today,
-            exercises: [{
-                templateId: "",
-                sets: [
-                    { reps: undefined, weight: undefined }
-                ]
-            }]
-        }
+        defaultValues: defaultWorkout
     })
     const { fields, append, remove } = useFieldArray<WorkoutInput>({
         control,
@@ -60,15 +79,18 @@ export default function WorkoutForm({ initialExercises }: WorkoutFormProps) {
     })
     const onSubmit: SubmitHandler<WorkoutInput> = async (data) => {
         try {
-            await addWorkout(data)
-            reset()
+            workout ? await editWorkout(data, workout.id) : await addWorkout(data)
+            workout ? router.refresh() : reset()
         } catch (err) {
             setError("root", { message: "Failed to save workout. Please try again." })
         }
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-card border border-subtle rounded-lg p-6 flex flex-col gap-6 md:p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className={clsx(
+            "flex flex-col gap-6 w-full",
+            !workout && "bg-card border border-subtle rounded-lg p-6 md:p-8"
+        )}>
             <div className={clsx("flex flex-col md:flex-row", errors.name ? "gap-3" : "gap-6")}>
                 <div className="flex flex-col gap-3 w-full">
                     <Input {...register("name")} label="Workout Name" type="text" placeholder="e.g., Upper Body Day" className="w-full" />
@@ -112,16 +134,16 @@ export default function WorkoutForm({ initialExercises }: WorkoutFormProps) {
                     variant="ghost" 
                     type="button" 
                     className="border border-subtle"
-                    onClick={() => reset()}
+                    onClick={workout ? onClose : () => reset()}
                 >
-                    Clear
+                    {workout ? "Cancel" : "Clear"}
                 </Button>
                 <Button 
                     variant="primary" 
                     type="submit"
                     disabled={isSubmitting}
                 >
-                    Log Workout
+                    {workout ? "Update Workout" : "Log Workout"}
                 </Button>
             </div>
         </form>

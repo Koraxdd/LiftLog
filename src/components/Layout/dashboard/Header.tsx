@@ -9,7 +9,7 @@ export default function Header() {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return ( 
-        <header className="bg-card border-b border-subtle p-4 relative md:hidden">
+        <header className="bg-card border-b border-subtle p-4 sticky top-0 z-50 md:hidden">
             <nav className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                     <Dumbbell
