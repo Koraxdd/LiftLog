@@ -22,6 +22,7 @@ export default function WorkoutCard({ initialExercises, workout }: WorkoutCardPr
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
     const router = useRouter()
+    const setAmount = calculateSets(workout)
 
     return (
         <>
@@ -36,9 +37,9 @@ export default function WorkoutCard({ initialExercises, workout }: WorkoutCardPr
                         <div className="flex gap-3 text-text-muted text-sm">
                             <p>{formatDate(workout.date)}</p>
                             <span>•</span>
-                            <p>{workout.exercises.length} exercises</p>
+                            <p>{workout.exercises.length} {workout.exercises.length === 1 ? "exercise" : "exercises"}</p>
                             <span>•</span>
-                            <p>{calculateSets(workout)} sets</p>
+                            <p>{setAmount} {setAmount === 1 ? "set" : "sets"}</p>
                         </div>
                         <div className="flex gap-2 flex-wrap">
                             {workout.exercises.map(exercise => {
