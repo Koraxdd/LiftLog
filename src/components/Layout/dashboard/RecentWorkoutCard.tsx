@@ -9,7 +9,7 @@ type RecentWorkoutCardProps = {
 
 export default function RecentWorkoutCard({ workout }: RecentWorkoutCardProps) {
     return (
-        <div className="flex flex-col gap-3 p-6 bg-card border border-subtle rounded-lg">
+        <div className="flex flex-col gap-3 p-6 bg-card border border-subtle rounded-lg transition-all cursor-pointer hover:border-brand hover:-translate-y-2 duration-300">
             <div className="flex justify-between">
                 <h2 className="text-xl font-semibold">{workout.name}</h2>
                 <Chip variant="stat">{calculateVolume(workout)} kg</Chip>
