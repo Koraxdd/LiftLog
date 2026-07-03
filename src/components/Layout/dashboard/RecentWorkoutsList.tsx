@@ -1,9 +1,6 @@
-import Chip from "@/components/UI/Chip";
 import CustomLink from "@/components/UI/CustomLink";
 import { authOptions } from "@/lib/auth";
 import { getRecentWorkouts } from "@/queries/workouts";
-import { calculateVolume } from "@/utils/calculateVolume";
-import { formatDate } from "@/utils/formatDate";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import RecentWorkoutCard from "./RecentWorkoutCard";

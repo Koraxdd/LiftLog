@@ -15,7 +15,10 @@ type CustomLinkProps = {
 
 export default function CustomLink({ children, href, className, variant, onClick }: CustomLinkProps) {
     const path = usePathname()
-    const isActive = path === href
+    const isActive = 
+        href === "/dashboard"
+            ? path === "/dashboard"
+            : path === href || path.startsWith(`${href}/`)   
 
     const style = clsx(
         variant === "mobile" && `flex flex-col justify-around gap-1 items-center font-semibold text-xs ${isActive ? "text-brand" : "text-text-muted"}`,

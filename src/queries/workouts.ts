@@ -1,5 +1,5 @@
 import { WorkoutInput } from "@/components/Layout/log/WorkoutForm";
-import { Workout } from "@/generated/prisma/client";
+import { type Workout } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export async function createWorkout(workout: WorkoutInput, userId: string): Promise<Workout> {
@@ -87,5 +87,19 @@ export async function getRecentWorkouts(userId: string) {
         },
         orderBy: { createdAt: "desc" },
         take: 3
+    })
+}
+
+export async function getWorkoutById(id: string) {
+    return await prisma.workout.findUnique({
+        where: { id },
+        include: {
+            exercises: {
+                include: {
+                    exerciseTemplate: true,
+                    sets: true
+                }
+            }
+        }
     })
 }
