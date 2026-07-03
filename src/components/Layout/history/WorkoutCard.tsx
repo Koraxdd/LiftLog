@@ -98,7 +98,7 @@ export default function WorkoutCard({ initialExercises, workout, isOpen }: Worko
                             className="hover:bg-[#DC2626]"
                             onClick={async () => {
                                 await deleteWorkout(workout.id)
-                                router.refresh()
+                                isOpen ? router.push("/dashboard") : router.refresh()
                                 setIsDeleteModalOpen(false)
                             }}
                         >
