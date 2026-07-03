@@ -1,3 +1,5 @@
+"use client"
+
 import type { Workout } from "@/app/dashboard/history/page"
 import Button from "@/components/UI/Button/Button"
 import Chip from "@/components/UI/Chip"
@@ -11,13 +13,15 @@ import { deleteWorkout } from "@/actions/workouts"
 import { useRouter } from "next/navigation";
 import Modal from "@/components/UI/Modal"
 import WorkoutForm, { type Exercises } from "../log/WorkoutForm"
+import clsx from "clsx"
 
 type WorkoutCardProps = {
     initialExercises: Exercises
     workout: Workout
+    isOpen?: boolean
 }
 
-export default function WorkoutCard({ initialExercises, workout }: WorkoutCardProps) {
+export default function WorkoutCard({ initialExercises, workout, isOpen }: WorkoutCardProps) {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
@@ -26,13 +30,24 @@ export default function WorkoutCard({ initialExercises, workout }: WorkoutCardPr
 
     return (
         <>
-            <div className="flex flex-col gap-4 bg-card border border-subtle rounded-lg px-6 pt-6 transition-colors hover:bg-surface">
-                <div className="flex flex-col gap-4 md:flex-row md:justify-between cursor-pointer" onClick={() => setIsDropdownOpen(prev => !prev)}>
+            <div 
+                className={clsx(
+                    "flex flex-col gap-4 bg-card border border-subtle rounded-lg px-6 pt-6",
+                    !isOpen && "transition-colors hover:bg-surface"
+                )}
+            >
+                <div 
+                    className={clsx(
+                        "flex flex-col gap-4 md:flex-row md:justify-between",
+                        !isOpen && "cursor-pointer"
+                    )} 
+                    onClick={() => setIsDropdownOpen(prev => !prev)}
+                >
                     <div className="flex flex-col gap-3">
                         <div className="flex items-center gap-4">
                             <h2 className="text-xl font-semibold">{workout.name}</h2>
-                            {isDropdownOpen ? <ChevronUp size={20} className="text-text-muted" /> :
-                                    <ChevronDown size={20} className="text-text-muted" />}
+                            {!isOpen && (isDropdownOpen ? <ChevronUp size={20} className="text-text-muted" /> :
+                                    <ChevronDown size={20} className="text-text-muted" />)}
                         </div>
                         <div className="flex gap-3 text-text-muted text-sm">
                             <p>{formatDate(workout.date)}</p>
@@ -68,7 +83,7 @@ export default function WorkoutCard({ initialExercises, workout }: WorkoutCardPr
                         </Button>
                     </div>
                 </div>
-                <WorkoutCardDropdown workout={workout} isOpen={isDropdownOpen} />
+                <WorkoutCardDropdown workout={workout} isOpen={isOpen ? isOpen : isDropdownOpen} />
             </div>
             {isDeleteModalOpen && 
                 <Modal onClose={() => setIsDeleteModalOpen(false)}>
