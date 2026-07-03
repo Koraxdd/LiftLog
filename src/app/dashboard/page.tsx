@@ -1,3 +1,4 @@
+import RecentWorkoutsList from "@/components/Layout/dashboard/RecentWorkoutsList";
 import StatsList from "@/components/Layout/dashboard/StatsList";
 import { authOptions } from "@/lib/auth";
 import { getAllWorkoutsByUserId } from "@/queries/workouts";
@@ -20,6 +21,7 @@ export default async function DashboardPage() {
                 <p className="font-medium">Here's your fitness summary for today</p>
             </div>
             <StatsList workouts={workouts} />
+            <RecentWorkoutsList />
         </div>
     )
 }

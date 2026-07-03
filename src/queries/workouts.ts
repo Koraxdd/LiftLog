@@ -73,3 +73,19 @@ export async function updateWorkout(workout: WorkoutInput, workoutId: string) {
         }
     })
 }
+
+export async function getRecentWorkouts(userId: string) {
+    return await prisma.workout.findMany({
+        where: { userId },
+        include: {
+            exercises: {
+                include: {
+                    exerciseTemplate: true,
+                    sets: true
+                }
+            }
+        },
+        orderBy: { createdAt: "desc" },
+        take: 3
+    })
+}

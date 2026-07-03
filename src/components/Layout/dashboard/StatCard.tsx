@@ -6,7 +6,7 @@ type DashboardCardProps = {
     data: string
 }
 
-export default function DashboardCard({ icon, title, data }: DashboardCardProps) {
+export default function StatCard({ icon, title, data }: DashboardCardProps) {
     return (
         <div className="bg-card border border-subtle rounded-lg p-6 flex flex-col gap-4">
             {icon}
