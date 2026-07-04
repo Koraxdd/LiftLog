@@ -10,7 +10,6 @@ type WorkoutPageProps = {
 }
 
 export default async function WorkoutPage({ params }: WorkoutPageProps) {
-    
     const session = await getServerSession(authOptions)
     const userId = session?.user.id
     if (!userId) {
