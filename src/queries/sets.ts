@@ -1,6 +1,7 @@
+import type { Set } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 
-export async function getRecentRecords(userId: string) {
+export async function getRecentRecords(userId: string): Promise<{ name: string, weight: number, date: Date }[]> {
     const sets = await prisma.set.findMany({
         where: { 
             exercise: {
@@ -35,4 +36,14 @@ export async function getRecentRecords(userId: string) {
     return Array.from(recordMap.values())
         .sort((a, b) => b.date.getTime() - a.date.getTime())
         .slice(0, 3)
+}
+
+export async function getAllSetsByUserId(userId: string): Promise<Set[]> {
+    return await prisma.set.findMany({
+        where: {
+            exercise: {
+                workout: { userId }
+            }
+        }
+    })
 }
