@@ -3,7 +3,7 @@ import type { ReactElement } from "react"
 type DashboardCardProps = {
     icon: ReactElement
     title: string
-    data: string
+    data: string | number
 }
 
 export default function StatCard({ icon, title, data }: DashboardCardProps) {
