@@ -1,9 +1,11 @@
+import VolumeChart from "@/components/charts/VolumeChart";
 import RecentWorkoutsList from "@/components/Layout/dashboard/RecentWorkoutsList";
 import RecordsList from "@/components/Layout/dashboard/RecordsList";
 import StatsList from "@/components/Layout/dashboard/StatsList";
 import { authOptions } from "@/lib/auth";
 import { getAllSetsByUserId } from "@/queries/sets";
-import { getAllWorkoutsByUserId } from "@/queries/workouts";
+import { getAllWorkoutsByUserId, getThisWeekWorkouts } from "@/queries/workouts";
+import { calculateVolume } from "@/utils/calculateVolume";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -16,6 +18,22 @@ export default async function DashboardPage() {
 
     const workouts = await getAllWorkoutsByUserId(userId)
     const sets = await getAllSetsByUserId(userId)
+    const thisWeekWorkouts = await getThisWeekWorkouts(userId)
+
+    const data = [
+        { day: "Mon", volume: 0 },
+        { day: "Tue", volume: 0 },
+        { day: "Wed", volume: 0 },
+        { day: "Thu", volume: 0 },
+        { day: "Fri", volume: 0 },
+        { day: "Sat", volume: 0 },
+        { day: "Sun", volume: 0 },
+    ]
+
+    for (const workout of thisWeekWorkouts) {
+        const index = (workout.date.getDay() + 6) % 7
+        data[index].volume = calculateVolume(workout)
+    }
 
     return (
         <div className="flex flex-col gap-8 px-4 pt-2 pb-7 md:px-45 md:pt-8">
@@ -24,6 +42,7 @@ export default async function DashboardPage() {
                 <p className="font-medium">Here's your fitness summary for today</p>
             </div>
             <StatsList workouts={workouts} sets={sets} />
+            <VolumeChart data={data} />
             <RecentWorkoutsList />
             <RecordsList userId={userId} />
         </div>

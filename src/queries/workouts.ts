@@ -103,3 +103,36 @@ export async function getWorkoutById(id: string) {
         }
     })
 }
+
+export async function getThisWeekWorkouts(userId: string) {
+    const startOfWeek = new Date()
+    const day = startOfWeek.getDay()
+    const diff = day === 0 ? -6 : 1 - day
+
+    startOfWeek.setDate(startOfWeek.getDate() + diff)
+    startOfWeek.setHours(0, 0, 0, 0)
+
+    const endOfWeek = new Date(startOfWeek)
+    endOfWeek.setDate(endOfWeek.getDate() + 6)
+    endOfWeek.setHours(23, 59, 59, 999)
+
+    console.log(startOfWeek, endOfWeek)
+
+    return await prisma.workout.findMany({
+        where: {
+            userId,
+            date: {
+                gte: startOfWeek,
+                lt: endOfWeek
+            }
+        },
+        include: {
+            exercises: {
+                include: {
+                    exerciseTemplate: true,
+                    sets: true
+                }
+            }
+        }
+    })
+}
