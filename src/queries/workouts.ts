@@ -1,5 +1,5 @@
 import { WorkoutInput } from "@/components/Layout/log/WorkoutForm";
-import { Workout } from "@/generated/prisma/client";
+import { type Workout } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export async function createWorkout(workout: WorkoutInput, userId: string): Promise<Workout> {
@@ -69,6 +69,69 @@ export async function updateWorkout(workout: WorkoutInput, workoutId: string) {
                         }))
                     }
                 }))
+            }
+        }
+    })
+}
+
+export async function getRecentWorkouts(userId: string) {
+    return await prisma.workout.findMany({
+        where: { userId },
+        include: {
+            exercises: {
+                include: {
+                    exerciseTemplate: true,
+                    sets: true
+                }
+            }
+        },
+        orderBy: { createdAt: "desc" },
+        take: 3
+    })
+}
+
+export async function getWorkoutById(id: string) {
+    return await prisma.workout.findUnique({
+        where: { id },
+        include: {
+            exercises: {
+                include: {
+                    exerciseTemplate: true,
+                    sets: true
+                }
+            }
+        }
+    })
+}
+
+export async function getThisWeekWorkouts(userId: string) {
+    const startOfWeek = new Date()
+    const day = startOfWeek.getDay()
+    const diff = day === 0 ? -6 : 1 - day
+
+    startOfWeek.setDate(startOfWeek.getDate() + diff)
+    startOfWeek.setHours(0, 0, 0, 0)
+
+    const endOfWeek = new Date(startOfWeek)
+    endOfWeek.setDate(endOfWeek.getDate() + 6)
+    endOfWeek.setHours(23, 59, 59, 999)
+
+    console.log(startOfWeek, endOfWeek)
+
+    return await prisma.workout.findMany({
+        where: {
+            userId,
+            date: {
+                gte: startOfWeek,
+                lt: endOfWeek
+            }
+        },
+        include: {
+            exercises: {
+                include: {
+                    exerciseTemplate: true,
+                    sets: true
+                }
             }
         }
     })

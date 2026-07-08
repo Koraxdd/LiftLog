@@ -8,13 +8,17 @@ import { usePathname } from "next/navigation"
 type CustomLinkProps = {
     children: ReactNode
     href: string
-    variant: "mobile" | "desktop"
+    className?: string
+    variant?: "mobile" | "desktop"
     onClick?: MouseEventHandler<HTMLAnchorElement>
 }
 
-export default function CustomLink({ children, href, variant, onClick }: CustomLinkProps) {
+export default function CustomLink({ children, href, className, variant, onClick }: CustomLinkProps) {
     const path = usePathname()
-    const isActive = path === href
+    const isActive = 
+        href === "/dashboard"
+            ? path === "/dashboard"
+            : path === href || path.startsWith(`${href}/`)   
 
     const style = clsx(
         variant === "mobile" && `flex flex-col justify-around gap-1 items-center font-semibold text-xs ${isActive ? "text-brand" : "text-text-muted"}`,
@@ -22,6 +26,6 @@ export default function CustomLink({ children, href, variant, onClick }: CustomL
     )
 
     return (
-        <Link href={href} className={style} onClick={onClick}>{children}</Link>
+        <Link href={href} className={clsx(style, className)} onClick={onClick}>{children}</Link>
     )
 }
