@@ -116,8 +116,6 @@ export async function getThisWeekWorkouts(userId: string) {
     endOfWeek.setDate(endOfWeek.getDate() + 6)
     endOfWeek.setHours(23, 59, 59, 999)
 
-    console.log(startOfWeek, endOfWeek)
-
     return await prisma.workout.findMany({
         where: {
             userId,
