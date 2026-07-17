@@ -4,6 +4,8 @@ import { getRecentWorkouts } from "@/queries/workouts";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import RecentWorkoutCard from "./RecentWorkoutCard";
+import { Dumbbell } from "lucide-react";
+import Button from "@/components/UI/Button/Button";
 
 export default async function RecentWorkoutsList() {
     const session = await getServerSession(authOptions)
@@ -13,6 +15,9 @@ export default async function RecentWorkoutsList() {
     }
 
     const recentWorkouts = await getRecentWorkouts(userId)
+    const recentWorkoutCards = recentWorkouts.map(workout => (
+                                <RecentWorkoutCard key={workout.id} workout={workout} />
+                            ))
 
     return (
         <div className="flex flex-col gap-4">
@@ -23,9 +28,22 @@ export default async function RecentWorkoutsList() {
                 </div>
                 <CustomLink href="/dashboard/history" className="text-brand text-sm font-medium">View All</CustomLink>
             </div>
-            {recentWorkouts.map(workout => (
-                <RecentWorkoutCard key={workout.id} workout={workout} />
-            ))}
+            {recentWorkouts.length === 0 ? (
+                <div className="flex flex-col items-center gap-4 text-center bg-card border border-subtle rounded-lg py-30 px-20">
+                    <Dumbbell size={30} className="rotate-y-180 text-text-muted" />
+                    <div className="flex flex-col gap-2">
+                        <h3 className="text-text-primary font-semibold text-xl">No workouts yet</h3>
+                        <p className="font-medium">Start logging your workouts to see them here</p>
+                    </div>
+                    <Button 
+                        variant="primary" 
+                        size="sm" 
+                        href="/dashboard/log"
+                    >
+                        Log Your First Workout
+                    </Button>
+                </div>
+            ) :  recentWorkoutCards}
         </div>
     )
 }
