@@ -2,6 +2,7 @@
 
 import { Line, LineChart, ResponsiveContainer, XAxis } from "recharts";
 import { Zap } from "lucide-react";
+import CustomTick from "./CustomTick";
 
 type VolumeChartProps = {
     data: {
@@ -24,12 +25,20 @@ export default function VolumeChart({ data }: VolumeChartProps) {
                 <LineChart 
                     data={data} 
                     accessibilityLayer={false}
-                    margin={{ left: 20, right: 20 }}
+                    margin={{ left: 20, right: 20, bottom: 50 }}
                 >
+                    <line 
+                        x1={0}
+                        y1={245.5} 
+                        x2={3000}
+                        y2={245.5} 
+                        stroke="#374151" 
+                        strokeWidth={1} 
+                    />
                     <XAxis 
                         dataKey="day" 
-                        tick={{ fill: "#9CA3AF", fontSize: 13, fontWeight: 400 }}
-                        axisLine={{ stroke: "#374151" }}
+                        tick={<CustomTick data={data} />}
+                        axisLine={false}
                         tickLine={false} 
                     />
                     <Line 
