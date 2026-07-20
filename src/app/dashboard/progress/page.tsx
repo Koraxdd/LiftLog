@@ -29,16 +29,18 @@ export default async function ProgressPage() {
             </div>
             <ProgressDropdown exercises={exercises} />
             <div className="bg-card border border-subtle rounded-lg p-6 flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                    <h2 className="text-2xl font-semibold">Weight Progress</h2>
-                    <p className="font-medium">Track your strength gains over time</p>
-                </div>
-                <div className="bg-linear-to-br from-[#22C55E]/10 to-card border border-[#22C55E]/20 p-6 rounded-xl flex items-center gap-3">
-                    <Award className="text-white bg-[#22C55E] rounded-xl h-12 w-12 p-3" />
-                    <div className="flex flex-col">
-                        <span className="text-text-muted text-sm font-medium">Personal Record</span>
-                        <span className="text-text-primary text-xl font-semibold">120 kg</span>
-                        <span className="text-text-muted text-xs font-medium">2026-07-18</span>
+                <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
+                    <div className="flex flex-col gap-2">
+                        <h2 className="text-2xl font-semibold">Weight Progress</h2>
+                        <p className="font-medium">Track your strength gains over time</p>
+                    </div>
+                    <div className="bg-linear-to-br from-[#22C55E]/10 to-card border border-[#22C55E]/20 px-6 py-4 rounded-xl flex items-center gap-3">
+                        <Award className="text-white bg-[#22C55E] rounded-xl h-12 w-12 p-3" />
+                        <div className="flex flex-col">
+                            <span className="text-text-muted text-sm font-medium">Personal Record</span>
+                            <span className="text-text-primary text-xl font-semibold">120 kg</span>
+                            <span className="text-text-muted text-xs font-medium">2026-07-18</span>
+                        </div>
                     </div>
                 </div>
                 <ProgressChart />
