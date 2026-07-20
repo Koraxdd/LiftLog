@@ -26,7 +26,7 @@ export default async function RecentWorkoutsList() {
                     <h2 className="font-semibold text-2xl">Recent Workouts</h2>
                     <p className="text-sm font-medium">Your latest training sessions</p>
                 </div>
-                <CustomLink href="/dashboard/history" className="text-brand text-sm font-medium">View All</CustomLink>
+                <CustomLink href="/dashboard/history" className="text-brand text-sm font-medium hover:underline">View All</CustomLink>
             </div>
             {recentWorkouts.length === 0 ? (
                 <div className="flex flex-col items-center gap-4 text-center bg-card border border-subtle rounded-lg py-30 px-20">

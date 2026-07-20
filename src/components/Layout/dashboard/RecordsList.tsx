@@ -29,7 +29,7 @@ export default async function RecordsList({ userId }: RecordsListProps) {
                     <h2 className="font-semibold text-2xl">Personal Records</h2>
                     <p className="text-sm font-medium">Your recent PRs</p>
                 </div>
-                <CustomLink href="/dashboard/progress" className="text-brand text-sm font-medium">View All</CustomLink>
+                <CustomLink href="/dashboard/progress" className="text-brand text-sm font-medium hover:underline">View All</CustomLink>
             </div>
             <div className="border border-subtle rounded-lg overflow-x-auto">
                 {recentRecords.length !== 0 && (
