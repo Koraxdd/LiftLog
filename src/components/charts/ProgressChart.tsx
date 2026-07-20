@@ -10,6 +10,18 @@ export default function ProgressChart() {
         { weight: 100, date: "Mar 15" },
         { weight: 100, date: "Apr 15" },
         { weight: 110, date: "May 15" },
+        { weight: 120, date: "Jun 15" },
+        { weight: 80, date: "Jan 15" },
+        { weight: 90, date: "Feb 15" },
+        { weight: 100, date: "Mar 15" },
+        { weight: 100, date: "Apr 15" },
+        { weight: 110, date: "May 15" },
+        { weight: 120, date: "Jun 15" },
+        { weight: 80, date: "Jan 15" },
+        { weight: 90, date: "Feb 15" },
+        { weight: 100, date: "Mar 15" },
+        { weight: 100, date: "Apr 15" },
+        { weight: 110, date: "May 15" },
         { weight: 120, date: "Jun 15" }
     ]
 
@@ -40,6 +52,7 @@ export default function ProgressChart() {
                 />
                 <YAxis 
                     dataKey="weight"
+                    domain={[0, (dataMax) => dataMax + 20]}
                     stroke="#9CA3AF" 
                     strokeWidth={1.5}   
                     fontSize={12}
