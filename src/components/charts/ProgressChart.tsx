@@ -1,6 +1,7 @@
 "use client"
 
-import { Area, AreaChart, CartesianGrid, Line, ResponsiveContainer, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import CustomTooltip from "./CustomTooltip"
 
 export default function ProgressChart() {
     const data = [
@@ -25,6 +26,7 @@ export default function ProgressChart() {
                         <stop offset="100%" stopColor="#3B82F6" stopOpacity={0} />
                     </linearGradient>
                 </defs>
+                <Tooltip content={<CustomTooltip />} />
                 <CartesianGrid 
                     stroke="#374151"
                     strokeWidth={2}
