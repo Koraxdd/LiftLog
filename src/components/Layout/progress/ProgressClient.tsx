@@ -6,6 +6,7 @@ import { Award } from "lucide-react"
 import { ExerciseTemplate } from "@/generated/prisma/client"
 import { useEffect, useState } from "react"
 import { getProgressData } from "@/actions/progress"
+import { formatDate } from "@/utils/formatDate"
 
 type ProgressClientProps = {
     exercises: ExerciseTemplate[]
@@ -13,7 +14,11 @@ type ProgressClientProps = {
 
 export default function ProgressClient({ exercises }: ProgressClientProps) {
     const [exerciseName, setExerciseName] = useState<string>(exercises[0].name ?? "")
-    const [data, setData] = useState<{ weight: number, date: string }[]>([])
+    const [data, setData] = useState<{ 
+        weight: number, 
+        shortDate: string, 
+        fullDate: Date 
+    }[]>([])
 
     useEffect(() => {
         if (!exerciseName) {
@@ -27,6 +32,10 @@ export default function ProgressClient({ exercises }: ProgressClientProps) {
 
         fetchData()
     }, [exerciseName])
+
+    const pr = Math.max(...data.map(d => d.weight))
+    const prDate = data.find(d => d.weight === pr)?.fullDate
+    const formattedDate = prDate ? formatDate(prDate) : ""
 
     return (
         <div className="flex flex-col gap-8">
@@ -45,8 +54,8 @@ export default function ProgressClient({ exercises }: ProgressClientProps) {
                         <Award className="text-white bg-[#22C55E] rounded-xl h-12 w-12 p-3" />
                         <div className="flex flex-col">
                             <span className="text-text-muted text-sm font-medium">Personal Record</span>
-                            <span className="text-text-primary text-xl font-semibold">120 kg</span>
-                            <span className="text-text-muted text-xs font-medium">2026-07-18</span>
+                            <span className="text-text-primary text-xl font-semibold">{pr} kg</span>
+                            <span className="text-text-muted text-xs font-medium">{formattedDate}</span>
                         </div>
                     </div>
                 </div>

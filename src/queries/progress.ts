@@ -17,9 +17,10 @@ export async function getBestResults(exerciseName: string, userId: string) {
 
     return exercises.map(exercise => ({
         weight: Math.max(...exercise.sets.map(set => set.weight ?? 0)),
-        date: exercise.workout.date.toLocaleDateString("en", {
+        shortDate: exercise.workout.date.toLocaleDateString("en", {
             month: "short",
             day: "numeric"
-        })
+        }),
+        fullDate: exercise.workout.date
     })).slice(-6)
 }

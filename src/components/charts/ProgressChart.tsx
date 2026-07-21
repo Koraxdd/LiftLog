@@ -4,7 +4,8 @@ import CustomTooltip from "./CustomTooltip"
 type ProgressChartProps = {
     data: {
         weight: number
-        date: string
+        shortDate: string
+        fullDate: Date
     }[]
 }
 
@@ -29,7 +30,7 @@ export default function ProgressChart({ data }: ProgressChartProps) {
                     strokeDasharray="3 3"
                 />
                 <XAxis 
-                    dataKey="date" 
+                    dataKey="shortDate" 
                     stroke="#9CA3AF"
                     strokeWidth={1.5}
                     fontSize={12}
@@ -61,6 +62,7 @@ export default function ProgressChart({ data }: ProgressChartProps) {
                     stroke="#3B82F6"
                     fill="#3B82F6"
                     strokeWidth={3}
+                    dot={{ r: 4 }}
                 />
             </AreaChart>
         </ResponsiveContainer>
