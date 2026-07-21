@@ -1,30 +1,14 @@
-"use client"
-
 import { Area, AreaChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import CustomTooltip from "./CustomTooltip"
 
-export default function ProgressChart() {
-    const data = [
-        { weight: 80, date: "Jan 15" },
-        { weight: 90, date: "Feb 15" },
-        { weight: 100, date: "Mar 15" },
-        { weight: 100, date: "Apr 15" },
-        { weight: 110, date: "May 15" },
-        { weight: 120, date: "Jun 15" },
-        { weight: 80, date: "Jan 15" },
-        { weight: 90, date: "Feb 15" },
-        { weight: 100, date: "Mar 15" },
-        { weight: 100, date: "Apr 15" },
-        { weight: 110, date: "May 15" },
-        { weight: 120, date: "Jun 15" },
-        { weight: 80, date: "Jan 15" },
-        { weight: 90, date: "Feb 15" },
-        { weight: 100, date: "Mar 15" },
-        { weight: 100, date: "Apr 15" },
-        { weight: 110, date: "May 15" },
-        { weight: 120, date: "Jun 15" }
-    ]
+type ProgressChartProps = {
+    data: {
+        weight: number
+        date: string
+    }[]
+}
 
+export default function ProgressChart({ data }: ProgressChartProps) {
     return (
         <ResponsiveContainer width="100%" height={350} className="border-b border-subtle">
             <AreaChart 
