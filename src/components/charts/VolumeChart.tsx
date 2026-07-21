@@ -25,7 +25,7 @@ export default function VolumeChart({ data }: VolumeChartProps) {
                 <LineChart 
                     data={data} 
                     accessibilityLayer={false}
-                    margin={{ left: 20, right: 20, bottom: 50 }}
+                    margin={{ left: 20, right: 20, bottom: 50, top: 10 }}
                 >
                     <line 
                         x1={0}

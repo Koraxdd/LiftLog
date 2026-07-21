@@ -12,7 +12,7 @@ export default function ProgressDropdown({ exercises, exerciseName, onChange }: 
         <div className="bg-card border border-subtle rounded-lg p-6 flex flex-col gap-2">
             <h3 className="text-text-primary font-medium">Select Exercise</h3>
             <select 
-                className="bg-surface border border-subtle rounded-lg text-text-primary px-4 py-3"
+                className="bg-surface border border-subtle rounded-lg text-text-primary px-4 py-3 md:w-1/6"
                 value={exerciseName}
                 onChange={onChange}
             >
