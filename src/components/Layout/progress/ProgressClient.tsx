@@ -9,6 +9,7 @@ import { getProgressData } from "@/actions/progress"
 import { formatDate } from "@/utils/formatDate"
 import Button from "@/components/UI/Button/Button"
 import Spinner from "@/components/UI/Spinner"
+import ProgressOverview from "./ProgressOverview"
 
 type ProgressClientProps = {
     exercises: ExerciseTemplate[]
@@ -86,7 +87,12 @@ export default function ProgressClient({ exercises }: ProgressClientProps) {
                             Log A Workout
                         </Button>
                     </div>
-                ) : <ProgressChart data={data} />}
+                ) : (
+                    <>
+                        <ProgressChart data={data} />
+                        <ProgressOverview />
+                    </>
+                )}
             </div>
         </div>
     )
