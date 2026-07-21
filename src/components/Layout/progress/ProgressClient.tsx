@@ -15,7 +15,7 @@ type ProgressClientProps = {
 }
 
 export default function ProgressClient({ exercises }: ProgressClientProps) {
-    const [exerciseName, setExerciseName] = useState<string>(exercises[0].name ?? "")
+    const [exerciseName, setExerciseName] = useState<string>(exercises[0]?.name ?? "")
     const [data, setData] = useState<{ 
         weight: number, 
         shortDate: string, 
