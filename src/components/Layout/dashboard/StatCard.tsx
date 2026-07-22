@@ -4,11 +4,12 @@ import type { ReactElement } from "react"
 type DashboardCardProps = {
     icon: ReactElement
     title: string
-    data: string | number
+    data: string | number | null
     variant: "stat" | "progress"
+    text: "sm" | "md" | "lg"
 }
 
-export default function StatCard({ icon, title, data, variant }: DashboardCardProps) {
+export default function StatCard({ icon, title, data, variant, text }: DashboardCardProps) {
     return (
         <div className={clsx(
             "flex flex-col",
@@ -20,8 +21,9 @@ export default function StatCard({ icon, title, data, variant }: DashboardCardPr
                 <span className="text-text-muted text-sm font-medium">{title}</span>
                 <span className={clsx(
                     "text-text-primary font-semibold",
-                    variant === "stat" && "text-2xl md:text-3xl",
-                    variant === "progress" && "text-2xl"
+                    text === "lg" && "text-2xl md:text-3xl",
+                    text === "md" && "text-2xl",
+                    text === "sm" && "text-sm"
                 )}>{data}</span>
             </div>
         </div>

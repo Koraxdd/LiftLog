@@ -40,9 +40,14 @@ export default function ProgressClient({ exercises }: ProgressClientProps) {
         fetchData()
     }, [exerciseName])
 
-    const pr = data.length > 1 ? Math.max(...data.map(d => d.weight)) : null
+    const pr = data.length > 0 ? Math.max(...data.map(d => d.weight)) : null
     const prDate = data.find(d => d.weight === pr)?.fullDate
     const formattedDate = prDate ? formatDate(prDate) : ""
+
+    const totalSessions = data.length
+    const avgWeight = data.length ? (data.reduce((total, d) => d.weight + total, 0) / data.length).toFixed(1) : 0
+    const maxWeight = data.length ? Math.max(...data.map(d => d.weight)) : 0
+    const firstLogged = data.length ? formatDate(data[0].fullDate) : null
 
     return (
         <div className="flex flex-col gap-8">
@@ -90,7 +95,12 @@ export default function ProgressClient({ exercises }: ProgressClientProps) {
                 ) : (
                     <>
                         <ProgressChart data={data} />
-                        <ProgressOverview />
+                        <ProgressOverview
+                            totalSessions={totalSessions}
+                            avgWeight={avgWeight}
+                            maxWeight={maxWeight}
+                            firstLogged={firstLogged}
+                        />
                     </>
                 )}
             </div>
