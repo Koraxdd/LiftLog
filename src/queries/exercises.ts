@@ -22,3 +22,26 @@ export async function createExerciseTemplate(name: string, muscleGroup: string, 
         }
     })
 }
+
+export async function getLoggedExercises(userId: string) {
+    const workouts = await prisma.workout.findMany({
+        where: { userId },
+        select: { id: true }
+    })
+
+    const workoutIds = workouts.map(workout => workout.id)
+
+    const exercises = await prisma.exerciseTemplate.findMany({
+        where: {
+            exercises: {
+                some: {
+                    workoutId: {
+                        in: workoutIds
+                    }
+                }
+            }
+        }
+    })
+
+    return exercises
+}

@@ -35,7 +35,7 @@ export default function Button({ children, variant, size="md", href, type="butto
         href ? 
             <Link href={href} className={style}>{children}</Link> :
             <button disabled={disabled} type={type} onClick={onClick} className={style}>
-                {disabled ? <Spinner /> : null}
+                {disabled ? <Spinner className="border-text-primary border-t-brand" /> : null}
                 {children}
             </button>
     )
