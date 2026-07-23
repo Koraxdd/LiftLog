@@ -126,7 +126,7 @@ export default function ProgressClient({ exercises }: ProgressClientProps) {
                                 "font-semibold text-3xl",
                                 Number(percentageIncrease) >= 0 ? "text-[#22C55E]" : "text-[#EF4444]"
                             )}>
-                                {Number(percentageIncrease) >= 0 ? `+${percentageIncrease}%` : `-${percentageIncrease}%`}
+                                {Number(percentageIncrease) >= 0 ? `+${percentageIncrease}%` : `${percentageIncrease}%`}
                             </span>
                             <span className="text-sm">Since you started tracking</span>
                         </div>
