@@ -16,9 +16,11 @@ export default async function DashboardPage() {
         redirect("/login")
     }
 
-    const workouts = await getAllWorkoutsByUserId(userId)
-    const sets = await getAllSetsByUserId(userId)
-    const thisWeekWorkouts = await getThisWeekWorkouts(userId)
+    const [workouts, sets, thisWeekWorkouts] = await Promise.all([
+        await getAllWorkoutsByUserId(userId),
+        await getAllSetsByUserId(userId),
+        await getThisWeekWorkouts(userId)
+    ])
 
     const data = [
         { day: "Mon", volume: 0 },
