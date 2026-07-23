@@ -6,8 +6,13 @@ import { authOptions } from "@/lib/auth";
 import { getAllSetsByUserId } from "@/queries/sets";
 import { getAllWorkoutsByUserId, getThisWeekWorkouts } from "@/queries/workouts";
 import { calculateVolume } from "@/utils/calculateVolume";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Dashboard - LiftLog"
+};
 
 export default async function DashboardPage() {
     const session = await getServerSession(authOptions)

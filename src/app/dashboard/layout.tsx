@@ -1,13 +1,8 @@
 import type { ReactNode } from "react";
-import type { Metadata } from "next";
 import "../globals.css"
 import FooterNav from "@/components/Layout/dashboard/FooterNav";
 import Header from "@/components/Layout/dashboard/Header";
 import Sidebar from "@/components/Layout/dashboard/Sidebar";
-
-export const metadata: Metadata = {
-  title: "LiftLog - Dashboard"
-};
 
 type DashboardLayoutProps = {
     children: ReactNode

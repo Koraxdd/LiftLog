@@ -2,8 +2,13 @@ import WorkoutForm from "@/components/Layout/log/WorkoutForm"
 import { authOptions } from "@/lib/auth"
 import { getExercisesFromTemplate } from "@/queries/exercises"
 import { Dumbbell } from "lucide-react"
+import { Metadata } from "next"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
+
+export const metadata: Metadata = {
+  title: "Log Workout - LiftLog"
+};
 
 export default async function LogPage() {
     const session = await getServerSession(authOptions)

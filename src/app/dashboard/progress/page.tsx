@@ -2,8 +2,13 @@ import ProgressClient from "@/components/Layout/progress/ProgressClient";
 import { authOptions } from "@/lib/auth";
 import { getLoggedExercises } from "@/queries/exercises";
 import { TrendingUp } from "lucide-react";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Progress - LiftLog"
+};
 
 export default async function ProgressPage() {
     const session = await getServerSession(authOptions)

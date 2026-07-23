@@ -3,10 +3,15 @@ import { authOptions } from "@/lib/auth";
 import { getExercisesFromTemplate } from "@/queries/exercises";
 import { getAllWorkoutsByUserId } from "@/queries/workouts";
 import { History } from "lucide-react";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 export type Workout = Awaited<ReturnType<typeof getAllWorkoutsByUserId>>[number]
+
+export const metadata: Metadata = {
+  title: "History - LiftLog"
+};
 
 export default async function HistoryPage() {
     const session = await getServerSession(authOptions)

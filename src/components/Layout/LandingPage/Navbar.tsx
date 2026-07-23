@@ -3,7 +3,7 @@ import Button from "@/components/UI/Button/Button"
 
 export default function Navbar() {
     return (
-        <header className="sticky top-0 backdrop-blur-md opacity-90">
+        <header className="sticky top-0 backdrop-blur-md opacity-90 z-50">
             <nav className="border-b border-subtle bg-surface py-4 px-6 flex justify-around items-center">
                 <div className="flex items-center gap-2 md:w-1/4">
                     <Dumbbell
