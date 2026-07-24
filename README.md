@@ -39,18 +39,23 @@ A full-stack workout tracking app for logging exercises, monitoring progress and
 ## Screenshots
 
 **Dashboard**
+
 ![Dashboard](images/dashboard.png)
 
 **Log Workout**
+
 ![Log](images/log.png)
 
 **History**
+
 ![History](images/history.png)
 
 **Progress**
+
 ![Progress](images/progress.png)
 
 **Mobile**
+
 ![Mobile](images/mobile.png)
 
 ---
