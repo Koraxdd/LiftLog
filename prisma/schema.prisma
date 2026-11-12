@@ -51,7 +51,6 @@ model ExerciseTemplate {
   name        String     @unique
   muscleGroup String
   isCustom    Boolean    @default(false)
-  userId      String?
-  user        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users       User[]
   exercises   Exercise[]
 }

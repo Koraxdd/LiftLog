@@ -5,20 +5,24 @@ export async function getExercisesFromTemplate(userId: string): Promise<Exercise
     return await prisma.exerciseTemplate.findMany({
         where: {
             OR: [
-                { userId: null },
-                { userId }
+                { users: { none: {} } },
+                { users: { some: { id: userId } } }
             ]
         }
     })
 }
 
 export async function createExerciseTemplate(name: string, muscleGroup: string, userId: string): Promise<ExerciseTemplate> {
-    return await prisma.exerciseTemplate.create({
-        data: {
+    return await prisma.exerciseTemplate.upsert({
+        where: { name },
+        update: {
+            user: { connect: { id: userId }}
+        },
+        create: {
             name,
             muscleGroup,
             isCustom: true,
-            userId
+            user: { connect: { id: userId }}
         }
     })
 }
