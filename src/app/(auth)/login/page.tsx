@@ -1,7 +1,10 @@
+"use client"
+
 import { Dumbbell, MoveLeft } from "lucide-react"
 import Link from "next/link"
 import LoginForm from "@/components/Auth/LoginForm"
 import Button from "@/components/UI/Button/Button"
+import { signIn } from "next-auth/react"
 
 export default function LoginPage() {
     return (
@@ -17,7 +20,15 @@ export default function LoginPage() {
                 </div>
                 <div className="flex flex-col gap-6 border-b border-subtle">
                     <LoginForm />
-                    <p className="font-medium text-center mb-7">Don't have an account? <Link href="/register" className="text-brand md:hover:underline">Create one</Link></p>
+                    <div className="text-center mb-7">
+                        <p className="font-medium mb-2">Don't have an account? <Link href="/register" className="text-brand md:hover:underline">Create one</Link></p>
+                        <p className="font-medium">Or sign in with <button className="text-brand hover:underline cursor-pointer" onClick={async () => {
+                            await signIn("credentials", {
+                                email: "demo@gmail.com",
+                                password: "demodemo123"
+                            })
+                        }}>demo account</button></p>
+                    </div>
                 </div>
                 <div className="flex justify-center mb-6">
                     <Button variant="ghost" size="sm" href="/"><MoveLeft size={13} className="inline-flex" /> Back to Home</Button>
