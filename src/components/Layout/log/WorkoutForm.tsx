@@ -33,7 +33,6 @@ export type Exercises = {
     id: string
     muscleGroup: string
     isCustom: boolean
-    userId: string | null
 }[]
 
 type WorkoutFormProps = {
@@ -87,7 +86,7 @@ export default function WorkoutForm({ initialExercises, workout, onClose }: Work
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={clsx(
+        <form noValidate onSubmit={handleSubmit(onSubmit)} className={clsx(
             "flex flex-col gap-6 w-full",
             !workout && "bg-card border border-subtle rounded-lg p-6 md:p-8"
         )}>
