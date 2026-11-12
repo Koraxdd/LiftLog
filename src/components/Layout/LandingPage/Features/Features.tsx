@@ -18,15 +18,11 @@ export default function Features() {
                 <FeatureCard title="Advanced Analytics" icon={<ChartColumnIncreasing size={24} />}>
                     Access your complete workout history and analyse training patterns with powerful analytics tools.
                 </FeatureCard>
-                <FeatureCard title="Achievements" icon={<Award size={24} />}>
-                    Unlock badges and milestones as you progress. Stay motivated with our achievement system.
-                </FeatureCard>
-                <FeatureCard title="Exercise Library" icon={<Zap size={24} />}>
-                    Access a comprehensive library of exercises with muscle groups, equipment, and difficulty levels.
-                </FeatureCard>
-                <FeatureCard title="Social Features" icon={<Users size={24} />}>
-                    Share achievements, compete with friends, and stay motivated with our community features.
-                </FeatureCard>
+                <div className="md:col-start-2">
+                    <FeatureCard title="Exercise Library" icon={<Zap size={24} />}>
+                        Access a comprehensive library of exercises with muscle groups.
+                    </FeatureCard>
+                </div>
             </div>
         </section>
     )
