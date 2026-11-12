@@ -16,13 +16,13 @@ export async function createExerciseTemplate(name: string, muscleGroup: string, 
     return await prisma.exerciseTemplate.upsert({
         where: { name },
         update: {
-            user: { connect: { id: userId }}
+            users: { connect: { id: userId }}
         },
         create: {
             name,
             muscleGroup,
             isCustom: true,
-            user: { connect: { id: userId }}
+            users: { connect: { id: userId }}
         }
     })
 }
