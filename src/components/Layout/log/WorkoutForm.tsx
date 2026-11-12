@@ -33,7 +33,6 @@ export type Exercises = {
     id: string
     muscleGroup: string
     isCustom: boolean
-    userId: string | null
 }[]
 
 type WorkoutFormProps = {
