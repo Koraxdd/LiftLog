@@ -22,5 +22,5 @@ export async function getBestResults(exerciseName: string, userId: string) {
             day: "numeric"
         }),
         fullDate: exercise.workout.date
-    })).slice(-6)
+    }))
 }
